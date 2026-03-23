@@ -1,0 +1,243 @@
+/* 动画效果 */
+
+/* 脉冲动画 */
+@keyframes pulse {
+    0%, 100% {
+        opacity: 1;
+        box-shadow: 0 0 0 0 rgba(0, 212, 255, 0.7);
+    }
+    50% {
+        opacity: 0.8;
+        box-shadow: 0 0 0 8px rgba(0, 212, 255, 0);
+    }
+}
+
+/* 标记点脉冲 */
+@keyframes markerPulse {
+    0%, 100% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 0.6;
+    }
+    50% {
+        transform: translate(-50%, -50%) scale(1.5);
+        opacity: 0;
+    }
+}
+
+/* 扫描线动画 */
+.map-area::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, rgba(0, 212, 255, 0.8), transparent);
+    animation: scanLine 4s linear infinite;
+    pointer-events: none;
+    z-index: 5;
+}
+
+@keyframes scanLine {
+    0% {
+        top: 0;
+    }
+    100% {
+        top: 100%;
+    }
+}
+
+/* 渐入动画 */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* 滑入动画 */
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* 缩放进入 */
+@keyframes scaleIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* 数字滚动动画 */
+@keyframes countUp {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+/* 光晕动画 */
+@keyframes glow {
+    0%, 100% {
+        box-shadow: 0 0 5px rgba(0, 212, 255, 0.5);
+    }
+    50% {
+        box-shadow: 0 0 20px rgba(0, 212, 255, 0.8);
+    }
+}
+
+/* 旋转动画 */
+@keyframes rotate {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* 波纹动画 */
+@keyframes ripple {
+    0% {
+        transform: scale(0.8);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(2.5);
+        opacity: 0;
+    }
+}
+
+/* 应用动画类 */
+.fade-in {
+    animation: fadeIn 0.6s ease-out;
+}
+
+.slide-in {
+    animation: slideIn 0.6s ease-out;
+}
+
+.scale-in {
+    animation: scaleIn 0.4s ease-out;
+}
+
+/* 交错动画 */
+.panel:nth-child(1) {
+    animation: fadeIn 0.6s ease-out 0.1s backwards;
+}
+
+.panel:nth-child(2) {
+    animation: fadeIn 0.6s ease-out 0.2s backwards;
+}
+
+.panel:nth-child(3) {
+    animation: fadeIn 0.6s ease-out 0.3s backwards;
+}
+
+.panel:nth-child(4) {
+    animation: fadeIn 0.6s ease-out 0.4s backwards;
+}
+
+/* 悬停效果增强 */
+.panel:hover {
+    transform: translateY(-2px);
+    transition: transform 0.3s ease;
+}
+
+/* 按钮点击效果 */
+.map-btn:active,
+.control-item:active {
+    transform: scale(0.95);
+}
+
+/* 开关切换动画 */
+.control-switch {
+    transition: background 0.3s ease;
+}
+
+.control-switch::after {
+    transition: left 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+/* 加载动画 */
+@keyframes loading {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.loading-spinner {
+    width: 40px;
+    height: 40px;
+    border: 3px solid rgba(0, 212, 255, 0.3);
+    border-top-color: var(--accent-cyan);
+    border-radius: 50%;
+    animation: loading 1s linear infinite;
+}
+
+/* 闪烁动画 */
+@keyframes blink {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.3;
+    }
+}
+
+.blink {
+    animation: blink 2s ease-in-out infinite;
+}
+
+/* 数据更新闪光 */
+@keyframes flashUpdate {
+    0%, 100% {
+        background: transparent;
+    }
+    50% {
+        background: rgba(0, 212, 255, 0.2);
+    }
+}
+
+.data-updated {
+    animation: flashUpdate 0.6s ease;
+}
+
+/* 平滑滚动 */
+html {
+    scroll-behavior: smooth;
+}
+
+/* 过渡效果 */
+* {
+    transition: background-color 0.3s ease, 
+                color 0.3s ease, 
+                border-color 0.3s ease;
+}
+
+/* 禁用某些元素的过渡 */
+.marker,
+.marker::before,
+.marker::after {
+    transition: all 0.3s ease;
+}

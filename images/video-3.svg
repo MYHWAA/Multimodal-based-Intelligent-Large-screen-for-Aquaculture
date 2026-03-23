@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="320" height="180" viewBox="0 0 320 180">
+  <defs>
+    <linearGradient id="vidGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#051520"/>
+      <stop offset="100%" style="stop-color:#0a2540"/>
+    </linearGradient>
+  </defs>
+  <rect fill="url(#vidGrad)" width="320" height="180"/>
+  <rect x="10" y="10" width="300" height="160" fill="none" stroke="#1a4a6a" stroke-width="1" rx="4"/>
+  <circle cx="160" cy="90" r="25" fill="none" stroke="#3a7c9c" stroke-width="2"/>
+  <polygon points="152,78 152,102 172,90" fill="#3a7c9c"/>
+  <text x="160" y="140" font-family="Arial" font-size="10" fill="#5a9cbc" text-anchor="middle">监控画面</text>
+</svg>

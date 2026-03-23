@@ -1,0 +1,17 @@
+字体授权说明（标题区域）
+
+1) 首选字体
+- DIN Alternate / DIN 系列
+- 注意：多数商业 DIN 字体需单独购买商用授权，不可默认用于公开发布项目。
+
+2) 备选字体
+- 阿里巴巴普惠体 2.0
+- 授权说明：通常可免费商用，发布前需核验最新版官方授权条款与适用范围。
+
+3) 备选字体
+- 思源黑体（Source Han Sans）
+- 授权说明：基于 SIL Open Font License 1.1，可商用与再分发；需保留授权信息并遵守 OFL 条款。
+
+4) 实施建议
+- 线上发布采用字体栈：DIN Alternate, Alibaba PuHuiTi 2.0, Source Han Sans CN, Microsoft YaHei, sans-serif。
+- 若项目未购买 DIN 商用授权，建议将阿里巴巴普惠体 2.0 或思源黑体作为首选落地字体。

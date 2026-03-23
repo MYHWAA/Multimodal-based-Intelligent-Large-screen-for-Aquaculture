@@ -1,0 +1,1389 @@
+@import 'normalize.css';
+
+:root {
+    --bg-primary: #030b1e;
+    --bg-panel: rgba(6, 22, 45, 0.6);
+    --border-primary: #1a4d7c;
+    --text-primary: #ffffff;
+    --text-secondary: #8ec8e8;
+    --text-accent: #00d4ff;
+    --text-muted: #5a7a9a;
+    --accent-cyan: #00d4ff;
+    --accent-green: #00ff88;
+    --accent-yellow: #ffcc00;
+    --accent-orange: #ff8800;
+    --accent-red: #ff4444;
+
+    /* New Variables for Layout Adjustments */
+    --font-size-sm: 1.2rem;
+    --font-size-md: 1.4rem;
+    --font-size-lg: 1.6rem;
+    --line-height-tight: 1.4;
+    --icon-size-lg: 3.8rem; /* Scaled up 20% from 3.2rem */
+    --icon-size-xl: 5.4rem; /* New larger size for futuristic icons */
+    --gap-sm: 0.8rem;
+    --font-size-xs: 1.1rem; /* Smaller font for tech look */
+    --font-size-icon-text: 1.3rem; /* 15% reduction from 1.5rem (approx 13px) */
+    --gap-md: 1.8rem; /* Increased by 6px from 1.2rem (12px + 6px = 18px) */
+    --gap-layout: 1.6rem; /* 16px grid alignment (1rem = 10px) */
+    
+    /* Device Control Variables (Scaled 75%) */
+    --card-bg-start: rgba(10, 26, 47, 0.6);
+    --card-bg-end: rgba(30, 58, 95, 0.6);
+    --card-glow-color: #00E5FF;
+    --card-border-radius: 0.9rem; /* 12 * 0.75 = 9px */
+    --card-width: 9rem; /* 120 * 0.75 = 90px */
+    --card-height: 9rem; /* 120 * 0.75 = 90px */
+}
+
+/* Base Styles & Typography */
+html {
+    font-size: 62.5%; /* 1rem = 10px */
+    -webkit-text-size-adjust: 100%;
+    height: 100%;
+}
+
+body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: 'Microsoft YaHei', 'PingFang SC', sans-serif;
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    font-size: 1.4rem; /* 14px base */
+    line-height: 1.5;
+    overflow: hidden; /* Desktop default */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+img, video, svg {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* Dashboard Container */
+.dashboard-container {
+    width: 100%;
+    height: 100vh;
+    position: relative;
+    background: #030b1e url('../images/092.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+/* Header */
+.header {
+    height: 6rem;
+    background: transparent;
+    padding: 0 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    z-index: 100;
+    flex-shrink: 0;
+}
+
+/* Remove old overlay */
+.header::before {
+    display: none;
+}
+
+.header-title-container {
+    position: absolute;
+    left: 50%;
+    top: 0;
+    transform: translateX(-50%);
+    width: 80rem;
+    height: 5rem;
+    z-index: 103;
+    background: linear-gradient(135deg, rgba(11, 37, 62, 0.66) 0%, rgba(4, 26, 47, 0.52) 100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    clip-path: polygon(0 0, 100% 0, 95% 100%, 5% 100%);
+    --title-glow-width: clamp(2px, 0.12vw, 3px);
+    border: 1px solid #00d4ff;
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    box-shadow: 0 0 15px rgba(0, 212, 255, 0.4), inset 0 0 10px rgba(0, 212, 255, 0.2);
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    isolation: isolate;
+}
+
+.header-title-container:hover {
+    border-color: #00d4ff;
+    box-shadow: 0 0 15px rgba(0, 212, 255, 0.4), inset 0 0 10px rgba(0, 212, 255, 0.2);
+}
+
+.header-title-container::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    padding: var(--title-glow-width);
+    clip-path: polygon(0 0, 100% 0, 95% 100%, 5% 100%);
+    background: linear-gradient(100deg, rgba(0, 212, 255, 1) 0%, rgba(78, 96, 255, 1) 52%, rgba(169, 85, 247, 1) 100%);
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    mask-composite: exclude;
+    opacity: 0.3;
+    animation: titleEdgePulse 3s ease-in-out infinite;
+    box-shadow: 0 0 10px rgba(90, 110, 255, 0.35), 0 0 18px rgba(169, 85, 247, 0.24);
+    pointer-events: none;
+    z-index: 1;
+    will-change: opacity;
+    transform: translateZ(0);
+}
+
+.header-title {
+    font-family: "DIN Alternate", "Alibaba PuHuiTi 2.0", "Source Han Sans CN", "Microsoft YaHei", sans-serif;
+    font-size: clamp(2.8rem, 1.7vw + 1.9rem, 3.2rem);
+    font-weight: 600;
+    letter-spacing: 0.3rem;
+    color: #8ed6ff;
+    background: none;
+    -webkit-text-fill-color: currentColor;
+    text-shadow: 0 0 8px rgba(0, 180, 255, 0.35), 0 0 20px rgba(0, 180, 255, 0.2);
+    position: relative;
+    z-index: 2;
+    opacity: 1;
+    transform: none;
+    text-rendering: geometricPrecision;
+    -webkit-font-smoothing: antialiased;
+}
+
+@keyframes titleEdgePulse {
+    0%,
+    100% {
+        opacity: 0.3;
+    }
+    50% {
+        opacity: 0.8;
+    }
+}
+
+@media (prefers-color-scheme: dark) {
+    .header-title-container {
+        background: linear-gradient(135deg, rgba(3, 14, 25, 0.8) 0%, rgba(5, 20, 38, 0.72) 100%);
+        border-color: rgba(0, 180, 255, 0.48);
+        box-shadow: inset 0 0 16px rgba(0, 180, 255, 0.38), 0 0 20px rgba(0, 180, 255, 0.2);
+    }
+
+    .header-title-container::after {
+        box-shadow: 0 0 12px rgba(84, 104, 255, 0.42), 0 0 20px rgba(169, 85, 247, 0.34);
+    }
+
+    .header-title {
+        color: #00E5FF;
+        background: none;
+        -webkit-text-fill-color: currentColor;
+        text-shadow: 0 0 10px rgba(0, 229, 255, 0.45), 0 0 24px rgba(0, 229, 255, 0.26);
+    }
+}
+
+.nav-group {
+    position: absolute;
+    top: 1rem;
+    display: flex;
+    gap: 0; /* Seamless connection */
+    z-index: 101;
+    /* Ensure height matches Title visual height if possible, or center align */
+    height: 3.5rem; /* Slightly smaller than title height 5rem */
+    align-items: flex-end; /* Align bottom to match title baseline visual */
+    top: 0.8rem; /* Adjust top to align vertically with title */
+}
+
+.nav-left {
+    right: 50%;
+    margin-right: 37.9rem; /* Adjusted to 37.9rem to close gap with Title */
+    justify-content: flex-end; /* Align items to the right (touching title) */
+}
+
+.nav-right {
+    left: 50%;
+    margin-left: 37.9rem; /* Adjusted to 37.9rem to close gap with Title */
+    justify-content: flex-start; /* Align items to the left (touching title) */
+}
+
+.nav-tab {
+    padding: 0 2.5rem; /* Horizontal padding only */
+    height: 100%; /* Fill container height */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(180deg, rgba(2, 17, 50, 0.6) 0%, rgba(3, 36, 77, 0.6) 100%);
+    border: 1px solid rgba(0, 212, 255, 0.5); /* Increased opacity to match Title border */
+    color: #8ec8e8;
+    text-decoration: none; /* Ensure no underline for <a> tags */
+    cursor: pointer;
+    transition: all 0.3s;
+    text-align: center;
+    min-width: 12rem;
+    font-size: 1.4rem;
+    position: relative;
+    box-shadow: inset 0 0 10px rgba(0, 212, 255, 0.1);
+}
+
+/* Left Group Specifics */
+.nav-tab-left {
+    transform: skewX(40deg); 
+    border-right: none; /* Remove right border to merge with next item */
+    margin-right: 0; 
+}
+/* Restore right border for the very last item if we want it to abut the title with a line? 
+   User said "Remove adjacent border overlap... ensure ... touch".
+   Let's keep the last item's right border effectively 'none' or rely on Title's edge?
+   Title has no border. So we should probably keep a border on the last item to define the edge, 
+   OR remove it for true "seamless" look.
+   Given "remove overlapping borders", usually implies removing one of two.
+   Title has 0. Nav has 1. So we keep 1.
+   BUT wait, .nav-tab-left has border-right: none. So all items lose right border.
+   We need to add it back for the last item? No, user wants seamless.
+   Let's assume "seamless" means they merge.
+   However, between Nav Item 1 and Nav Item 2, we need a separator?
+   "Remove adjacent border overlap" -> 1px separator.
+   So: Item 1 has Left Border, No Right. Item 2 has Left Border (which acts as separator), No Right.
+   Wait, if Item 1 is left of Item 2. Item 1 Right touches Item 2 Left.
+   If Item 1 has no Right, and Item 2 has Left, we have 1px separator. Correct.
+   Item 2 (Last) touches Title. Item 2 has Left Border. No Right.
+   So Title connection has 0 border. Seamless merge.
+   BUT Title has a different background gradient angle. It might look weird if no border.
+   Let's try adding border-right to the last item just in case, or leave as is.
+   User said "ensure Div right border and Div left border fully touch... remove adjacent border overlap".
+   This usually refers to the siblings (Nav 1 and Nav 2).
+   For Title connection, "mirror processing... tight close...".
+   I will leave the last item borderless on the right to merge with Title.
+*/
+
+/* Right Group Specifics */
+.nav-tab-right {
+    transform: skewX(-40deg); 
+    border-left: none; /* Remove left border to merge */
+    margin-left: 0;
+}
+/* First item (touching Title) has no left border. Merges with Title.
+   Subsequent items have Right border (from base class? No base has border: 1px solid).
+   Base has border: 1px solid.
+   So .nav-tab-right has border-left: none. It keeps border-right.
+   Item 1 (touching Title): No Left, Has Right.
+   Item 2: No Left (merges with Item 1 Right), Has Right.
+   Result: Title | Item 1 | Item 2 |
+   Separator between Title/Item1? No. (Seamless)
+   Separator between Item1/Item2? Yes (Item 1 Right).
+   This looks correct for "seamless wing".
+*/
+
+/* Ensure the outer edges have borders? 
+   Left Group: Item 1 (Leftmost) needs Left Border. Item 2 needs Left Border (separator).
+   Right Group: Item 1 (Inner) needs Right Border (separator). Item 2 (Outer) needs Right Border.
+   
+   Correction:
+   .nav-tab-left: border-right: none.
+   Item 1 (Leftmost): Has Left, Top, Bottom. No Right.
+   Item 2 (Inner): Has Left, Top, Bottom. No Right.
+   Result: | Item 1 | Item 2 
+   (Item 2 Right merges with Title).
+   
+   .nav-tab-right: border-left: none.
+   Item 1 (Inner): Has Top, Bottom, Right. No Left.
+   Item 2 (Outer): Has Top, Bottom, Right. No Left.
+   Result: Item 1 | Item 2 |
+   (Item 1 Left merges with Title).
+   
+   This seems perfect.
+*/
+
+.nav-tab span {
+    display: block;
+    font-weight: bold;
+    text-shadow: 0 0 5px rgba(0, 212, 255, 0.3);
+}
+
+.nav-tab-left span {
+    transform: skewX(-40deg); /* Counter-skew */
+}
+
+.nav-tab-right span {
+    transform: skewX(40deg); /* Counter-skew */
+}
+
+.nav-tab.active, .nav-tab:hover {
+    background: linear-gradient(180deg, rgba(0, 212, 255, 0.2) 0%, rgba(0, 212, 255, 0.5) 100%);
+    border-color: #00d4ff;
+    color: #fff;
+    box-shadow: 0 0 15px rgba(0, 212, 255, 0.4), inset 0 0 10px rgba(0, 212, 255, 0.2);
+    text-shadow: 0 0 10px rgba(0, 212, 255, 0.8);
+    /* Ensure active state doesn't break border logic - borders are set by color, not width/style */
+}
+
+/* Responsive Adjustments */
+@media (max-width: 1600px) {
+    .header-title-container {
+        width: 60rem;
+    }
+    .nav-left {
+        margin-right: 29.8rem; /* 30rem - 0.2 */
+    }
+    .nav-right {
+        margin-left: 29.8rem;
+    }
+    .header-title {
+        font-size: clamp(2.8rem, 1.8vw + 1.8rem, 3.1rem);
+    }
+}
+
+@media (max-width: 1366px) {
+    .header-title-container {
+        width: 50rem;
+    }
+    .nav-left {
+        margin-right: 22.9rem; /* 25rem - 2.1rem */
+    }
+    .nav-right {
+        margin-left: 22.9rem;
+    }
+    .nav-tab {
+        padding: 0 1.5rem;
+        min-width: 9rem;
+        font-size: 1.2rem;
+    }
+}
+
+.header-right-info {
+    position: absolute;
+    right: 2rem;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    align-items: flex-end;
+    color: #00d4ff;
+    font-family: 'Consolas', monospace;
+    font-size: 1.6rem;
+    z-index: 102;
+    /* Ensure background is transparent or matches if needed */
+}
+
+.header-right-info > div {
+    /* Ensure equal height or spacing if needed */
+    line-height: 1.5;
+}
+
+/* Sidebar Toggle Removed */
+
+/* Main Layout */
+.main-content {
+    display: grid;
+    grid-template-columns: 29fr 42fr 29fr; /* Adjusted: Center -16%, Sides +16% to meet 15-20% reduction */
+    gap: var(--gap-layout);
+    padding: 0 var(--gap-layout) var(--gap-layout) var(--gap-layout);
+    flex: 1;
+    overflow: hidden;
+    height: calc(100vh - 6rem);
+}
+
+.col {
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-layout);
+    height: 100%;
+    overflow: hidden;
+    min-width: 0; /* Prevent flex overflow */
+}
+
+/* Monitor Row for Weather and Water Quality */
+.monitor-row {
+    display: flex;
+    gap: var(--gap-layout);
+    flex: 1;
+    min-height: 0;
+    width: 100%;
+}
+.monitor-row .panel {
+    flex: 1;
+    min-width: 0;
+}
+
+/* Flex Utilities for Panels */
+.flex-35 { flex: 35; }
+.flex-30 { flex: 30; }
+.flex-40 { flex: 40; }
+.flex-45 { flex: 45; }
+.flex-55 { flex: 55; }
+.flex-60 { flex: 60; }
+.flex-fixed-200 { flex: 0 0 20rem; }
+.flex-1 { flex: 1; }
+
+/* Dedicated Panel Classes for Right Column */
+.panel-device-control {
+    flex: 0 0 auto;
+    min-height: auto; /* Let content determine height to achieve ~2/3 reduction */
+    z-index: 5;
+    background: linear-gradient(to top, rgba(6, 22, 45, 0.6) 0%, rgba(6, 22, 45, 0) 100%) !important;
+    /* border: none !important; Removed to allow global panel border */
+    box-shadow: none !important;
+    backdrop-filter: none !important;
+}
+.panel-video-surveillance {
+    flex: 1;
+    min-height: 0;
+    z-index: 1;
+}
+
+/* Helper Classes to replace inline styles */
+.mr-20 { margin-right: 2rem; }
+.ml-auto { margin-left: auto; }
+.text-center { text-align: center; }
+.hidden { display: none; }
+.w-30 { width: 3rem; }
+.w-150 { width: 15rem; }
+
+/* Ranking Header */
+.ranking-header-row {
+    display: flex;
+    padding: 0 1rem 0.5rem 1rem;
+    color: var(--text-secondary);
+    font-size: 1.2rem;
+    border-bottom: 1px solid rgba(26, 77, 124, 0.3);
+}
+
+/* Header Actions & Selectors */
+.header-actions {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.selector-box {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--text-secondary);
+    font-size: 1.2rem;
+    border: 1px solid var(--border-primary);
+    padding: 0.2rem 0.8rem;
+    border-radius: 0.4rem;
+    background: rgba(0, 0, 0, 0.2);
+}
+
+.history-btn {
+    color: var(--text-muted);
+    cursor: pointer;
+    font-size: 1.2rem;
+    border: 1px solid var(--border-primary);
+    padding: 0.2rem 0.8rem;
+    border-radius: 0.4rem;
+}
+
+/* Legend Color Box */
+.legend-color-box {
+    display: inline-block;
+    width: 1.2rem;
+    height: 1.2rem;
+    background: rgba(0, 212, 255, 0.3);
+    border: 1px solid var(--accent-cyan);
+    margin-right: 0.5rem;
+}
+
+/* Video Overlay Text */
+.video-overlay-text {
+    position: absolute;
+    bottom: 3rem;
+    left: 1rem;
+    font-size: 1.2rem;
+    color: #0f0;
+}
+
+/* Mobile Flex Reset */
+.panel {
+    background: linear-gradient(to top, rgba(6, 22, 45, 0.6) 0%, rgba(6, 22, 45, 0) 100%);
+    border: 1px solid rgba(0, 212, 255, 0.3); /* Uniform light blue border */
+    position: relative;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    min-height: 0; /* Fix for Chrome flexbox overflow */
+    box-shadow: none;
+    backdrop-filter: none;
+}
+
+/* Panel Borders - Removed corner borders as requested */
+.panel::before, .panel::after, 
+.panel-corner-bl, .panel-corner-br {
+    display: none !important;
+}
+.panel::before { top: 0; left: 0; border-right: none; border-bottom: none; }
+.panel::after { top: 0; right: 0; border-left: none; border-bottom: none; }
+.panel-corner-bl { bottom: 0; left: 0; border-right: none; border-top: none; position: absolute; }
+.panel-corner-br { bottom: 0; right: 0; border-left: none; border-top: none; position: absolute; }
+
+.panel-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    border-left: 0.3rem solid #00d4ff;
+    padding-left: 1rem;
+    height: 3rem;
+    flex-shrink: 0;
+    background: linear-gradient(90deg, rgba(0, 212, 255, 0.15), transparent);
+}
+
+.panel-title {
+    font-size: 1.4rem;
+    font-weight: bold;
+    color: #fff;
+    text-shadow: 0 0 0.5rem rgba(0, 212, 255, 0.5);
+    letter-spacing: 0.1rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+    line-height: 3rem; /* Align vertically with header height */
+}
+
+/* Search Bar */
+.search-bar {
+    display: flex;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.3);
+    border: 0.1rem solid #1a4d7c;
+    border-radius: 0.2rem;
+    padding: 0.2rem 0.5rem;
+    width: 15rem;
+    height: 2.4rem;
+}
+.search-bar input {
+    background: transparent;
+    border: none;
+    color: #fff;
+    width: 100%;
+    outline: none;
+    font-size: 1.2rem;
+}
+.search-bar i { color: #00d4ff; font-size: 1.4rem; cursor: pointer; }
+
+/* Farmer Ranking List */
+.ranking-header {
+    display: flex;
+    padding: 0 1rem 0.5rem 1rem;
+    color: #8ec8e8;
+    font-size: 1.2rem;
+    border-bottom: 0.1rem solid rgba(26, 77, 124, 0.3);
+    margin-bottom: 0.5rem;
+}
+.ranking-list {
+    flex: 1;
+    overflow-y: hidden;
+    padding-right: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+.ranking-item {
+    display: flex;
+    align-items: center;
+    padding: 0.8rem 1rem;
+    background: rgba(0, 50, 100, 0.2);
+    border-radius: 0.2rem;
+    margin-bottom: 0.2rem;
+    height: 3.6rem;
+}
+.ranking-item:nth-child(odd) {
+    background: rgba(0, 50, 100, 0.1);
+}
+.ranking-item:hover {
+    background: rgba(0, 212, 255, 0.15);
+    transform: translateX(0.5rem);
+    transition: all 0.3s;
+}
+.rank-num {
+    width: 3rem;
+    color: #00ffcc;
+    font-weight: bold;
+    font-style: italic;
+    font-size: var(--font-size-sm);
+    line-height: var(--line-height-tight);
+}
+.rank-name { flex: 1; color: #fff; font-size: var(--font-size-sm); line-height: var(--line-height-tight); }
+.rank-value { color: #00d4ff; font-weight: bold; font-size: var(--font-size-sm); line-height: var(--line-height-tight); }
+
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+    width: 0.3rem;
+    height: 0.3rem;
+}
+::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.2);
+}
+::-webkit-scrollbar-thumb {
+    background: #1a4d7c;
+    border-radius: 0.2rem;
+}
+
+/* Pond Info */
+.pond-info-container {
+    display: flex;
+    gap: 1rem;
+    flex: 1;
+    min-height: 0;
+    overflow: hidden;
+    align-items: center;
+}
+.pond-img {
+    width: 45%;
+    /* Removed fixed height to allow auto sizing as requested */
+    height: auto;
+    /* Use flexbox to center image vertically if needed */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* border: 0.1rem solid #1a4d7c; Removed border as requested or implied for image insertion */
+    /* border-radius: 0.2rem; */
+    position: relative;
+    /* box-shadow: 0 0 1rem rgba(0, 0, 0, 0.5); */
+}
+.pond-img img {
+    max-width: 100%;
+    height: auto;
+    object-fit: contain;
+    border-radius: 0.2rem;
+    border: 0.1rem solid #1a4d7c;
+    box-shadow: 0 0 1rem rgba(0, 0, 0, 0.5);
+}
+
+.pond-details {
+    flex: 1;
+    font-size: var(--font-size-sm);
+    color: #ccc;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 0.4rem 1rem;
+    align-content: center;
+    padding-left: 1rem;
+    line-height: var(--line-height-tight);
+}
+.detail-label { color: #ccc; text-align: justify; text-align-last: justify; }
+.detail-value { color: #00d4ff; font-weight: bold; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+/* Weather Grid */
+.weather-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    gap: 1rem;
+    flex: 1;
+    min-height: 0;
+    padding: 1rem;
+}
+.weather-item {
+    background: transparent;
+    border: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column; /* Vertical layout: Icon top, Text bottom */
+    align-items: center;
+    justify-content: center;
+    gap: var(--gap-sm);
+    height: 100%;
+    transition: all 0.3s;
+}
+.weather-item:hover {
+    background: transparent;
+    transform: none;
+}
+.weather-icon {
+    width: var(--icon-size-xl);
+    height: var(--icon-size-xl);
+    margin-bottom: 0;
+    border: 0.1rem solid #00d4ff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.4rem;
+    color: #00d4ff;
+    box-shadow: 
+        0 0 1rem rgba(0, 212, 255, 0.4), 
+        inset 0 0 1.5rem rgba(0, 212, 255, 0.2);
+    background: linear-gradient(135deg, rgba(6, 22, 45, 0.6), rgba(0, 40, 80, 0.7));
+    flex-shrink: 0;
+    position: relative;
+    overflow: visible;
+}
+
+.weather-icon::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    border: 0.1rem solid rgba(0, 212, 255, 0.5);
+    opacity: 0;
+    z-index: -1;
+    animation: rippleEffect 3s infinite;
+}
+
+.weather-info {
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+}
+.weather-label { font-size: var(--font-size-xs); color: var(--text-secondary); margin-bottom: 0; line-height: 1; text-shadow: 0 0 0.5rem rgba(0,0,0,0.8); }
+.weather-value { font-size: var(--font-size-xs); color: var(--text-secondary); font-weight: normal; margin-top: 0; margin-left: 0; line-height: 1; text-shadow: 0 0 0.5rem rgba(0,0,0,0.8); }
+
+/* Map Area */
+.map-container {
+    flex: 0 0 calc(60% + 0.7rem); /* Adjusted for pixel-perfect alignment with left column */
+    background: url('../images/地图.png') no-repeat center center;
+    background-size: cover;
+    position: relative;
+    border: 1px solid rgba(0, 212, 255, 0.3); /* Add consistent border */
+    overflow: hidden;
+    min-height: 0; /* Fix for Chrome flexbox overflow */
+    box-shadow: none;
+}
+
+/* Map Overlay */
+.map-overlay {
+    position: absolute;
+    top: 2rem;
+    left: 2rem;
+    bottom: auto;
+    background: linear-gradient(90deg, rgba(10, 30, 60, 0.7), rgba(10, 30, 60, 0.4));
+    border-left: 0.2rem solid #00d4ff;
+    padding: 0.5rem 1rem;
+    color: #fff;
+    z-index: 2;
+    border-radius: 0 1rem 1rem 0;
+    box-shadow: 0 0.2rem 0.8rem rgba(0, 0, 0, 0.3);
+    min-width: auto;
+    transform: none; /* Reset scale */
+    display: flex;
+    flex-direction: column;
+}
+.map-overlay h3 { 
+    margin: 0; 
+    color: #fff; 
+    font-size: 1.1rem; /* Matched with weather module (xs) */
+    font-weight: 600;
+    line-height: 1.2;
+    letter-spacing: 0.05rem;
+    text-shadow: 0 0 5px rgba(0, 212, 255, 0.3);
+}
+.map-overlay-title {
+    color: #00d4ff;
+    font-size: 1.1rem; /* Matched with weather module (xs) */
+    font-weight: bold;
+    margin-top: 0.2rem;
+    text-align: left;
+    letter-spacing: 0.1rem;
+    text-transform: uppercase;
+}
+
+/* Map Markers */
+.map-markers {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+/* Map Legend */
+.map-legend {
+    position: absolute;
+    bottom: 1.5rem;
+    right: 1.5rem;
+    background: transparent; /* Updated to transparent as requested */
+    padding: 0.5rem; /* Scaled down 66.7% (was 0.75rem) */
+    border: 1px solid rgba(0, 212, 255, 0.3);
+    border-radius: 0.27rem; /* Scaled down 66.7% (was 0.4rem) */
+    font-size: 0.73rem; /* Scaled down 66.7% (was 1.1rem) */
+    color: #ccc;
+    z-index: 2;
+    transform: none;
+    backdrop-filter: none; /* Removed blur effect due to transparency */
+    box-shadow: 0 0.13rem 0.67rem rgba(0, 0, 0, 0.4); /* Scaled down 66.7% (was 0.2rem 1rem) */
+}
+.legend-title {
+    font-size: 0.73rem; /* Scaled down 66.7% (was 1.1rem) */
+    color: #00d4ff;
+    margin-bottom: 0.33rem; /* Scaled down 66.7% (was 0.5rem) */
+    font-weight: bold;
+    /* border-bottom: 1px solid rgba(0, 212, 255, 0.2); Removed to match clean look */
+    padding-bottom: 0.17rem; /* Scaled down 66.7% (was 0.25rem) */
+    text-align: left;
+}
+.legend-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.53rem; /* Scaled down 66.7% (was 0.8rem) */
+}
+.legend-item { 
+    display: flex; 
+    flex-direction: row;
+    align-items: center; 
+    justify-content: flex-start;
+    gap: 0.27rem; /* Scaled down 66.7% (was 0.4rem) */
+    font-size: 0.73rem; /* Scaled down 66.7% (was 1.1rem) */
+    color: #fff; /* White text as per image */
+    cursor: pointer;
+    transition: all 0.2s ease;
+    padding: 0.13rem; /* Scaled down 66.7% (was 0.2rem) */
+    border-radius: 0.13rem; /* Scaled down 66.7% (was 0.2rem) */
+}
+.legend-item:hover {
+    background: rgba(0, 212, 255, 0.1);
+}
+.legend-item:active {
+    transform: scale(0.95);
+}
+
+/* Legend Icons */
+.legend-icon {
+    width: 1.2rem; /* Adjusted for visibility and ratio */
+    height: 1.2rem;
+    filter: drop-shadow(0 0 1px rgba(0,0,0,0.5));
+}
+
+/* Legend Specific Colors */
+.legend-item:nth-child(1) .legend-icon { color: #00d4ff; } /* Valve - Cyan */
+.legend-item:nth-child(2) .legend-icon { color: #a0d4ff; } /* Fountain - Light Blue */
+.legend-item:nth-child(3) .legend-icon { color: #ffffff; } /* Air Pump - White */
+.legend-item:nth-child(4) .legend-icon { color: #ffcc00; } /* Camera - Yellow */
+.legend-item:nth-child(5) .legend-icon { color: #0080ff; } /* Water Pump - Blue */
+.legend-item:nth-child(6) .legend-icon { color: #00d4ff; } /* Water Quality - Cyan */
+.legend-item:nth-child(7) .legend-icon { color: #00ff88; } /* Aerator - Green */
+
+/* Map Markers */
+.marker {
+    position: absolute;
+    width: 1.2rem;
+    height: 1.2rem;
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 10;
+    transform: translate(-50%, -50%);
+}
+
+.marker::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 0.4rem;
+    height: 0.4rem;
+    background: #fff;
+    border-radius: 50%;
+}
+
+.marker::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 2rem;
+    height: 2rem;
+    border: 0.2rem solid currentColor;
+    border-radius: 50%;
+    opacity: 0;
+    animation: markerPulse 2s infinite;
+}
+
+.marker:hover {
+    z-index: 20;
+    transform: translate(-50%, -50%) scale(1.2);
+}
+
+.marker:hover::after {
+    opacity: 1;
+}
+
+.marker.cyan { background: #00d4ff; color: #00d4ff; }
+.marker.green { background: #00ff88; color: #00ff88; }
+.marker.yellow { background: #ffcc00; color: #ffcc00; }
+.marker.orange { background: #ff8800; color: #ff8800; }
+.marker.blue { background: #0080ff; color: #0080ff; }
+.marker.red { background: #ff4444; color: #ff4444; }
+
+/* Marker Tooltip */
+.marker-tooltip {
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0, 30, 60, 0.8);
+    border: 0.1rem solid var(--border-primary);
+    padding: 0.4rem 0.8rem;
+    border-radius: 0.4rem;
+    font-size: 1.2rem;
+    white-space: nowrap;
+    color: #fff;
+    opacity: 0;
+    transition: opacity 0.3s;
+    pointer-events: none;
+    margin-bottom: 0.8rem;
+    z-index: 30;
+}
+
+.marker:hover .marker-tooltip {
+    opacity: 1;
+}
+
+@keyframes markerPulse {
+    0% { transform: translate(-50%, -50%) scale(0.5); opacity: 1; }
+    100% { transform: translate(-50%, -50%) scale(2); opacity: 0; }
+}
+
+@keyframes rippleEffect {
+    0% { width: 100%; height: 100%; opacity: 0.8; border-width: 0.2rem; }
+    100% { width: 180%; height: 180%; opacity: 0; border-width: 0; }
+}
+
+.weather-icon.icon-text-adjust, .wq-icon.icon-text-adjust {
+    font-size: var(--font-size-icon-text);
+    letter-spacing: 0.08rem; /* Slightly increased spacing for legibility */
+    line-height: 1.1; /* Adjusted line height */
+}
+
+.weather-icon.icon-text-adjust {
+    font-weight: bold;
+}
+
+.wq-icon.icon-text-adjust {
+    font-weight: bold;
+}
+
+/* Water Quality */
+.water-quality-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    gap: 1rem;
+    flex: 1;
+    min-height: 0;
+    padding: 1rem;
+    align-items: center;
+}
+.wq-item {
+    background: transparent;
+    border-radius: 0;
+    padding: 0 0 0 1.5rem; /* Left padding for alignment */
+    display: flex;
+    flex-direction: row; /* Horizontal layout: Icon left, Text right */
+    align-items: center;
+    justify-content: flex-start; /* Left alignment for consistent icon position */
+    text-align: left;
+    position: relative;
+    height: 100%;
+    transition: all 0.3s;
+    gap: var(--gap-md); /* Increased gap for WQ items (1.2rem) */
+}
+.wq-item:hover {
+    background: transparent;
+    transform: none;
+}
+.wq-icon {
+    width: var(--icon-size-xl);
+    height: var(--icon-size-xl);
+    border: 0.1rem solid #00d4ff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 0;
+    font-size: 2.4rem;
+    font-weight: bold;
+    color: #00d4ff;
+    background: linear-gradient(135deg, rgba(6, 22, 45, 0.8), rgba(0, 40, 80, 0.9));
+    box-shadow: 
+        0 0 1rem rgba(0, 212, 255, 0.4), 
+        inset 0 0 1.5rem rgba(0, 212, 255, 0.2);
+    position: relative;
+    flex-shrink: 0;
+    overflow: visible;
+}
+
+.wq-icon::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    border: 0.1rem solid rgba(0, 212, 255, 0.5);
+    opacity: 0;
+    z-index: -1;
+    animation: rippleEffect 3s infinite;
+}
+
+.wq-icon i { font-size: 2.4rem; }
+
+.wq-info {
+    display: flex;
+    flex-direction: column; /* Vertical text: Label top, Value bottom */
+    align-items: flex-start;
+    justify-content: center;
+    white-space: nowrap;
+}
+
+.wq-label {
+    font-size: var(--font-size-xs);
+    color: var(--text-secondary);
+    line-height: var(--line-height-tight);
+    margin-bottom: 0;
+    text-shadow: 0 0 0.5rem rgba(0,0,0,0.8);
+}
+
+.wq-value {
+    font-size: var(--font-size-xs);
+    color: var(--text-accent); /* Use accent color for value to improve contrast/readability */
+    font-weight: bold;
+    line-height: var(--line-height-tight);
+    margin-left: 0;
+    text-shadow: 0 0 0.5rem rgba(0,0,0,0.8);
+}
+
+.wq-icon::before {
+    content: '';
+    position: absolute;
+    top: -0.3rem; left: -0.3rem; right: -0.3rem; bottom: -0.3rem;
+    border-radius: 50%;
+    border: 0.1rem solid transparent;
+    border-top-color: #00d4ff;
+    border-bottom-color: #00d4ff;
+    box-shadow: 0 0 0.5rem #00d4ff;
+    animation: spin 4s linear infinite;
+    opacity: 0.7;
+}
+
+/* Device Grid */
+.device-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--gap-layout);
+    padding: var(--gap-layout);
+    flex: 1;
+    min-height: 0;
+    justify-items: center; /* Center items in grid cells */
+}
+
+/* Control Card */
+.control-card {
+    position: relative;
+    width: 100%;
+    max-width: var(--card-width);
+    aspect-ratio: 1;
+    border-radius: var(--card-border-radius);
+    background: linear-gradient(135deg, var(--card-bg-start), var(--card-bg-end));
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    overflow: hidden;
+    transition: transform 0.1s ease-out, box-shadow 0.3s ease-in-out;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+/* Grid Texture */
+.control-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+        linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+    background-size: 10px 10px;
+    opacity: 0.6;
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* Icon Container */
+.icon-container {
+    width: 4.8rem; /* Scaled up 1.33x */
+    height: 4.8rem;
+    margin-bottom: 0.8rem;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.device-svg {
+    width: 100%;
+    height: 100%;
+    color: #A0A0A0; /* Inactive Grey to match reference */
+    transition: color 0.3s ease, filter 0.3s ease;
+}
+
+/* Label */
+.device-label {
+    font-size: 1.1rem;
+    color: #FFFFFF;
+    font-weight: 500;
+    z-index: 1;
+    letter-spacing: 0.05rem;
+}
+
+/* Interactions */
+.control-card:hover {
+    transform: translateY(-2px);
+}
+
+.control-card:active {
+    transform: scale(0.95);
+}
+
+/* Active State */
+.control-card.active {
+    box-shadow: 0 0 1.5rem rgba(0, 229, 255, 0.4);
+    animation: glowPulse 2s infinite alternate;
+    border: 1px solid rgba(0, 229, 255, 0.3); /* Subtle border for active state */
+}
+
+.control-card.active .device-svg {
+    color: var(--card-glow-color);
+    filter: drop-shadow(0 0 0.5rem rgba(0, 229, 255, 0.8)); /* Icon Glow */
+}
+
+@keyframes glowPulse {
+    0% { box-shadow: 0 0 0.8rem rgba(0, 229, 255, 0.2); }
+    100% { box-shadow: 0 0 1.6rem rgba(0, 229, 255, 0.6); }
+}
+
+/* Device Icons Styles */
+/* These are now inline SVGs, so we handle fill/stroke there or via currentcolor */
+
+/* Video */
+.video-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    flex: 1;
+    min-height: 0;
+    overflow: hidden;
+}
+.video-feed {
+    flex: 1;
+    background: #000;
+    border: 0.15rem solid #1a4d7c; /* Increased border width by 50% */
+    position: relative;
+    overflow: hidden;
+    width: 90%; /* Reduced width by 10% */
+    margin: 0 auto; /* Center the container horizontally */
+}
+.video-feed img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Fill the container completely */
+    opacity: 0.9;
+}
+.video-info {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.7);
+    padding: 0.5rem 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1.2rem;
+}
+.rec-dot {
+    width: 0.8rem;
+    height: 0.8rem;
+    background: #0f0;
+    border-radius: 50%;
+    display: inline-block;
+    margin-right: 0.5rem;
+    box-shadow: 0 0 0.5rem #0f0;
+    animation: blink 1s infinite alternate;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+@keyframes blink {
+    0% { opacity: 0.5; }
+    100% { opacity: 1; }
+}
+
+/* Dropdown custom style */
+.custom-select {
+    background: rgba(0, 20, 40, 0.6);
+    border: 0.1rem solid #1a4d7c;
+    color: #8ec8e8;
+    padding: 0.2rem 1rem;
+    border-radius: 0.4rem;
+    outline: none;
+    cursor: pointer;
+}
+.custom-select option {
+    background: rgba(3, 11, 30, 0.9);
+}
+
+/* Responsive Media Queries */
+/* 1. Large Screens (Standard Desktop) */
+@media screen and (max-width: 1440px) {
+    .header-title { font-size: 2.8rem; }
+    .header-title-container { width: 50rem; }
+}
+
+/* 2. Laptops & Small Desktops */
+@media screen and (max-width: 1024px) {
+    body { overflow: auto; }
+    .dashboard-container { height: auto; min-height: 100vh; overflow-y: auto; }
+    .main-content {
+        grid-template-columns: 1fr 1fr;
+        height: auto;
+        padding-bottom: 2rem;
+    }
+    .col:nth-child(2) { /* Center column */
+        grid-column: span 2;
+        order: -1; /* Move map to top */
+        height: 50vh;
+    }
+    .col:nth-child(1), .col:nth-child(3) {
+        height: auto;
+    }
+    .header-title-container {
+        width: min(52rem, 64vw);
+    }
+    .header-title {
+        font-size: clamp(2.8rem, 2.2vw + 1.5rem, 3rem);
+    }
+    
+    /* Reset Flex utilities for mobile stacking */
+    .flex-35, .flex-30, .flex-40, .flex-60, .flex-fixed-200, .panel-device-control, .panel-video-surveillance {
+        flex: none;
+        height: auto;
+        min-height: 20rem; /* Give some default height to panels */
+    }
+    .flex-fixed-200, .panel-device-control {
+        min-height: auto; /* Allow auto height for panels if needed */
+    }
+
+    /* Stack monitor row panels */
+    .monitor-row {
+        flex-direction: column;
+        height: auto;
+    }
+    .monitor-row .panel {
+        min-height: 25rem;
+    }
+}
+
+/* 3. Tablets */
+@media screen and (max-width: 768px) {
+    .main-content {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+    .col:nth-child(2) {
+        grid-column: span 1;
+        height: 40vh;
+    }
+    .header {
+        flex-direction: column;
+        height: auto;
+        padding: 1rem;
+    }
+    .header-title-container {
+        position: relative;
+        left: 0;
+        top: 0;
+        transform: none;
+        width: 100%;
+        margin-bottom: 1rem;
+        max-width: 100%;
+    }
+    .header-right-info {
+        width: 100%;
+        justify-content: center;
+    }
+    .nav-tabs {
+        width: 100%;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+    .sidebar-toggle {
+        display: none; /* Hide sidebar toggle on mobile for now */
+    }
+    .water-quality-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+/* 4. Large Mobile */
+@media screen and (max-width: 414px) {
+    .water-quality-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    .weather-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .device-grid {
+        grid-template-columns: 1fr;
+    }
+    .header-title {
+        font-size: 2.8rem;
+        letter-spacing: 0.22rem;
+    }
+    /* Increase clickable areas */
+    .device-btn, .nav-tab, .weather-item {
+        min-height: 4.8rem;
+        min-width: 4.8rem;
+    }
+}
+
+/* 5. Medium Mobile */
+@media screen and (max-width: 375px) {
+    .header-title { font-size: 2.8rem; }
+}
+
+/* 6. Small Mobile */
+@media screen and (max-width: 320px) {
+    .header-title { font-size: 2.8rem; }
+    .water-quality-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* Touch Optimizations */
+@media (pointer: coarse) {
+    .nav-tab, .device-btn, .marker {
+        cursor: pointer;
+    }
+    /* Ensure no hover effects stick on touch */
+    .ranking-item:hover { transform: none; }
+}

@@ -1,0 +1,682 @@
+/* ========== 左侧面板 ========== */
+.left-column {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(10px, 1vw, 15px);
+    max-height: calc(100vh - 90px);
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+/* 排行榜 */
+.ranking-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.ranking-table th {
+    text-align: left;
+    padding: 8px;
+    font-size: clamp(11px, 0.9vw, 12px);
+    color: var(--text-muted);
+    font-weight: normal;
+    border-bottom: 1px solid rgba(30, 90, 138, 0.3);
+}
+
+.ranking-table td {
+    padding: clamp(8px, 0.8vw, 10px) 8px;
+    font-size: clamp(12px, 1vw, 13px);
+    border-bottom: 1px solid rgba(30, 90, 138, 0.2);
+}
+
+.rank-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 26px;
+    height: 26px;
+    background: rgba(0, 100, 150, 0.5);
+    border-radius: 4px;
+    font-size: clamp(11px, 0.9vw, 12px);
+}
+
+.rank-gold .rank-badge {
+    background: linear-gradient(135deg, #ffd700, #ffaa00);
+    color: #0a1a2a;
+}
+
+.ranking-table .value {
+    color: var(--accent-cyan);
+    font-weight: bold;
+}
+
+/* 气象监测摘要 */
+.weather-summary {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+    margin-top: 12px;
+}
+
+.weather-summary-item {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 8px;
+    background: rgba(0, 60, 100, 0.3);
+    border-radius: 6px;
+    border: 1px solid rgba(30, 90, 138, 0.3);
+}
+
+.weather-summary-item .label {
+    font-size: clamp(10px, 0.9vw, 11px);
+    color: var(--text-muted);
+}
+
+.weather-summary-item .value {
+    font-size: clamp(14px, 1.2vw, 16px);
+    font-weight: bold;
+    color: var(--accent-cyan);
+}
+
+/* ========== 中间地图区域 ========== */
+.center-column {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(10px, 1vw, 15px);
+    max-height: calc(100vh - 90px);
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.map-container {
+    flex: 0 0 auto;
+    height: 60vh;
+    max-height: calc(100vh - 110px);
+    display: flex;
+    flex-direction: column;
+    background: var(--bg-panel);
+    border: 2px solid var(--border-primary);
+    border-radius: 8px;
+    overflow: hidden;
+    position: relative;
+    box-shadow: 0 0 40px rgba(0, 100, 200, 0.15);
+}
+
+.map-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, var(--accent-cyan), transparent);
+    z-index: 20;
+}
+
+.map-header {
+    padding: clamp(8px, 1vw, 12px) clamp(15px, 1.5vw, 20px);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid rgba(30, 90, 138, 0.5);
+    background: linear-gradient(90deg, rgba(0, 80, 150, 0.3), transparent);
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.map-info {
+    font-size: clamp(12px, 1vw, 14px);
+    color: var(--text-secondary);
+}
+
+.map-info strong {
+    color: var(--accent-cyan);
+    font-size: clamp(14px, 1.3vw, 18px);
+    margin: 0 3px;
+}
+
+.map-controls {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.map-btn {
+    background: rgba(0, 100, 150, 0.5);
+    border: 1px solid var(--border-primary);
+    color: var(--text-secondary);
+    padding: 6px 12px;
+    font-size: clamp(11px, 0.9vw, 12px);
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.map-btn:hover {
+    background: rgba(0, 150, 200, 0.6);
+    color: var(--text-accent);
+}
+
+.map-area {
+    flex: 1;
+    position: relative;
+    background: linear-gradient(180deg, rgba(0, 30, 60, 0.6), rgba(0, 50, 100, 0.4));
+    overflow: hidden;
+}
+
+.map-image {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+/* 地图上的监控点 */
+.map-markers {
+    position: absolute;
+    top: 90px;;
+    left: 130px;
+    right: 140px;
+    bottom:125px;
+    pointer-events: none;
+}
+
+.marker {
+    position: absolute;
+    width: clamp(8px, 0.8vw, 12px);
+    height: clamp(8px, 0.8vw, 12px);
+    border-radius: 50%;
+    cursor: pointer;
+    pointer-events: auto;
+    transition: all 0.3s;
+    z-index: 10;
+}
+
+.marker::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: clamp(3px, 0.4vw, 5px);
+    height: clamp(3px, 0.4vw, 5px);
+    background: #fff;
+    border-radius: 50%;
+}
+
+.marker::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: clamp(20px, 2vw, 30px);
+    height: clamp(20px, 2vw, 30px);
+    border: 2px solid currentColor;
+    border-radius: 50%;
+    opacity: 0;
+    animation: markerPulse 2s infinite;
+}
+
+.marker:hover {
+    transform: scale(1.4);
+    z-index: 20;
+}
+
+.marker:hover::after {
+    opacity: 1;
+}
+
+.marker.cyan {
+    background: var(--accent-cyan);
+    color: var(--accent-cyan);
+}
+
+.marker.green {
+    background: var(--accent-green);
+    color: var(--accent-green);
+}
+
+.marker.yellow {
+    background: var(--accent-yellow);
+    color: var(--accent-yellow);
+}
+
+.marker.orange {
+    background: var(--accent-orange);
+    color: var(--accent-orange);
+}
+
+.marker.blue {
+    background: #0080ff;
+    color: #0080ff;
+}
+
+.marker.red {
+    background: var(--accent-red);
+    color: var(--accent-red);
+}
+
+.marker.offline {
+    background: #666;
+    color: #666;
+    opacity: 0.5;
+}
+
+.marker-tooltip {
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0, 30, 60, 0.8);
+    border: 1px solid var(--border-primary);
+    padding: 6px 12px;
+    border-radius: 4px;
+    font-size: clamp(10px, 0.9vw, 12px);
+    white-space: nowrap;
+    opacity: 0;
+    transition: opacity 0.3s;
+    pointer-events: none;
+    margin-bottom: 8px;
+}
+
+.marker:hover .marker-tooltip {
+    opacity: 1;
+}
+
+.map-legend {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    background: rgba(0, 30, 60, 0.6);
+    padding: 10px 15px;
+    border-radius: 6px;
+    border: 1px solid var(--border-primary);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: clamp(11px, 1vw, 13px);
+    z-index: 15;
+}
+
+.legend-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--accent-cyan);
+    animation: pulse 2s infinite;
+}
+
+.map-bottom-legend {
+    position: absolute;
+    bottom: 15px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: clamp(10px, 1.5vw, 20px);
+    background: rgba(0, 30, 60, 0.6);
+    padding: 10px clamp(10px, 1.5vw, 20px);
+    border-radius: 6px;
+    border: 1px solid var(--border-primary);
+    z-index: 15;
+    flex-wrap: wrap;
+}
+
+.legend-category {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: clamp(10px, 0.9vw, 12px);
+    color: var(--text-secondary);
+}
+
+.legend-category .dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+}
+
+.dot.blue {
+    background: #0080ff;
+}
+
+.dot.green {
+    background: #00ff88;
+}
+
+.dot.cyan {
+    background: #00d4ff;
+}
+
+.dot.yellow {
+    background: #ffcc00;
+}
+
+.dot.orange {
+    background: #ff8800;
+}
+
+.dot.red {
+    background: #ff4444;
+}
+
+/* 水质监测区域 */
+.water-quality-section {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: clamp(10px, 1vw, 15px);
+}
+
+.water-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(60px, 1fr));
+    gap: 8px;
+}
+
+.water-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+    padding: clamp(8px, 0.8vw, 10px) 5px;
+    background: rgba(0, 50, 100, 0.3);
+    border-radius: 8px;
+    border: 1px solid rgba(30, 90, 138, 0.3);
+    transition: all 0.3s;
+}
+
+.water-item:hover {
+    background: rgba(0, 80, 120, 0.4);
+    transform: translateY(-2px);
+}
+
+.water-icon {
+    width: clamp(28px, 2.5vw, 32px);
+    height: clamp(28px, 2.5vw, 32px);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: clamp(12px, 1.1vw, 14px);
+    font-weight: bold;
+    color: #fff;
+}
+
+.water-icon.ph {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+}
+
+.water-icon.do {
+    background: linear-gradient(135deg, #4facfe, #00f2fe);
+}
+
+.water-icon.temp {
+    background: linear-gradient(135deg, #ff6b6b, #ff8e53);
+}
+
+.water-icon.turb {
+    background: linear-gradient(135deg, #a8edea, #fed6e3);
+}
+
+.water-value {
+    font-size: clamp(13px, 1.1vw, 15px);
+    font-weight: bold;
+    color: var(--accent-cyan);
+}
+
+.water-label {
+    font-size: clamp(9px, 0.8vw, 10px);
+    color: var(--text-muted);
+}
+
+/* ========== 右侧面板 ========== */
+.right-column {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(10px, 1vw, 15px);
+    max-height: calc(100vh - 90px);
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+/* 塘区选择器 */
+.pond-selector {
+    margin-left: auto;
+}
+
+.pond-selector select {
+    background: rgba(0, 60, 100, 0.5);
+    border: 1px solid var(--border-primary);
+    color: var(--text-accent);
+    padding: 6px 12px;
+    font-size: clamp(11px, 0.9vw, 12px);
+    border-radius: 4px;
+    cursor: pointer;
+    outline: none;
+}
+
+.pond-info {
+    padding: 10px;
+    background: rgba(0, 50, 100, 0.3);
+    border-radius: 6px;
+    margin-bottom: 12px;
+}
+
+.pond-status {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+    font-size: clamp(12px, 1vw, 13px);
+}
+
+.status-value.online {
+    color: var(--accent-green);
+}
+
+.status-value.offline {
+    color: var(--accent-red);
+}
+
+.pond-stats {
+    display: flex;
+    gap: 15px;
+}
+
+.stat-item {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.stat-item .stat-label {
+    font-size: clamp(10px, 0.9vw, 11px);
+    color: var(--text-muted);
+}
+
+.stat-item .stat-value {
+    font-size: clamp(13px, 1.1vw, 14px);
+    font-weight: bold;
+    color: var(--accent-cyan);
+}
+
+/* 设备控制网格 */
+.control-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
+    gap: clamp(8px, 0.8vw, 10px);
+}
+
+.control-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    padding: clamp(10px, 1vw, 12px);
+    background: rgba(0, 50, 100, 0.3);
+    border: 1px solid rgba(30, 90, 138, 0.3);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.control-item:hover {
+    background: rgba(0, 80, 120, 0.4);
+    transform: translateY(-2px);
+}
+
+.control-icon {
+    width: clamp(35px, 3vw, 45px);
+    height: clamp(35px, 3vw, 45px);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: clamp(18px, 1.8vw, 24px);
+    background: linear-gradient(135deg, rgba(0, 100, 200, 0.5), rgba(0, 150, 255, 0.3));
+}
+
+.control-label {
+    font-size: clamp(11px, 0.9vw, 12px);
+    color: var(--text-secondary);
+}
+
+.control-switch {
+    width: 40px;
+    height: 20px;
+    background: rgba(100, 100, 100, 0.5);
+    border-radius: 10px;
+    position: relative;
+    transition: all 0.3s;
+}
+
+.control-switch::after {
+    content: '';
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 16px;
+    height: 16px;
+    background: #fff;
+    border-radius: 50%;
+    transition: all 0.3s;
+}
+
+.control-switch.active {
+    background: var(--accent-cyan);
+}
+
+.control-switch.active::after {
+    left: 22px;
+}
+
+/* 视频监控 */
+.video-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: clamp(8px, 0.8vw, 10px);
+}
+
+.video-item {
+    position: relative;
+    aspect-ratio: 16 / 9;
+    background: rgba(0, 30, 60, 0.5);
+    border-radius: 6px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.video-item:hover {
+    transform: scale(1.02);
+    box-shadow: 0 4px 12px rgba(0, 212, 255, 0.3);
+}
+
+.video-thumb {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: none;
+}
+
+.video-placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    color: var(--text-muted);
+    font-size: clamp(11px, 0.9vw, 12px);
+}
+
+.play-icon {
+    width: clamp(30px, 3vw, 40px);
+    height: clamp(30px, 3vw, 40px);
+    background: rgba(0, 212, 255, 0.3);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: clamp(14px, 1.2vw, 18px);
+    color: var(--accent-cyan);
+}
+
+.video-controls {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 6px 8px;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.video-name {
+    font-size: clamp(10px, 0.9vw, 11px);
+    color: var(--text-primary);
+}
+
+/* 流量统计 */
+.stats-row {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: clamp(8px, 0.8vw, 10px) 0;
+    border-bottom: 1px solid rgba(30, 90, 138, 0.2);
+}
+
+.stats-row:last-child {
+    border-bottom: none;
+}
+
+.stat-chart {
+    flex-shrink: 0;
+}
+
+.stat-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.stat-info .stat-value {
+    font-size: clamp(16px, 1.4vw, 20px);
+    font-weight: bold;
+    color: var(--accent-cyan);
+}
+
+.stat-details p {
+    font-size: clamp(11px, 0.9vw, 12px);
+    color: var(--text-secondary);
+    margin: 2px 0;
+}
+
+.stat-sub {
+    color: var(--text-muted);
+    font-size: clamp(10px, 0.8vw, 11px);
+}

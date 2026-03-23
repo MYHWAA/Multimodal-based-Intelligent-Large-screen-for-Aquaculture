@@ -1,0 +1,527 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>浦江源水产园区智慧平台</title>
+    <link
+      href="https://cdn.bootcdn.net/ajax/libs/remixicon/3.5.0/remixicon.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.loli.net/css2?family=Rajdhani:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/main.css" />
+    <link rel="stylesheet" href="css/components.css" />
+    <link rel="stylesheet" href="css/pages.css" />
+  </head>
+  <body>
+    <div class="dashboard-container">
+      <!-- Header -->
+      <header class="header">
+        <!-- Left Navigation Group -->
+        <div class="nav-group nav-left">
+          <a href="index.html" class="nav-tab nav-tab-left">
+            <span>园区总览</span>
+          </a>
+          <a href="smart-farming.html" class="nav-tab nav-tab-left">
+            <span>智慧养殖</span>
+          </a>
+        </div>
+
+        <!-- Center Title -->
+        <div class="header-title-container">
+          <div class="header-title">“泽鳌飞兴”水产园区智慧平台</div>
+        </div>
+
+        <!-- Right Navigation Group -->
+        <div class="nav-group nav-right">
+          <a href="quality-control.html" class="nav-tab nav-tab-right active">
+            <span>质量控制</span>
+          </a>
+          <a href="daily-management.html" class="nav-tab nav-tab-right">
+            <span>日常管理</span>
+          </a>
+        </div>
+        <div class="header-right-info">
+          <div id="weather-info"><i class="ri-sun-line"></i> 26°C</div>
+          <div id="datetime">2026-03-06 00:01</div>
+        </div>
+      </header>
+
+      <!-- Main Content -->
+      <main class="main-content layout-sidebar">
+        <!-- Left Column -->
+        <div class="col left-column">
+          <!-- Inspection Pass Rate -->
+          <div class="qc-panel flex-25">
+            <div class="qc-panel-header" style="padding-bottom: 0; border-bottom: none; margin-bottom: 0;">
+              <span class="qc-panel-title">合格率趋势</span>
+              <div class="header-actions">
+                <div id="passRateToggle" class="toggle-group qc-toggle-group">
+                  <button class="qc-toggle-btn active">季度</button>
+                  <button class="qc-toggle-btn">年度</button>
+                </div>
+              </div>
+            </div>
+            <div class="chart-container" style="margin-top: -15px;">
+              <canvas id="passRateChart"></canvas>
+            </div>
+          </div>
+
+          <!-- Recent Inspections -->
+          <div class="qc-panel flex-35">
+            <div class="qc-panel-header">
+              <span class="qc-panel-title">近期检测记录</span>
+            </div>
+            <table class="ranking-table">
+              <thead>
+                <tr>
+                  <th>产品</th>
+                  <th>批次</th>
+                  <th>结果</th>
+                  <th>日期</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>大闸蟹</td>
+                  <td>20260301</td>
+                  <td><span class="qc-status-tag qc-status-pass">合格</span></td>
+                  <td>03-01</td>
+                </tr>
+                <tr>
+                  <td>青虾</td>
+                  <td>20260302</td>
+                  <td><span class="qc-status-tag qc-status-pass">合格</span></td>
+                  <td>03-02</td>
+                </tr>
+                <tr>
+                  <td>鳜鱼</td>
+                  <td>20260303</td>
+                  <td><span class="qc-status-tag qc-status-recheck">复检</span></td>
+                  <td>03-03</td>
+                </tr>
+                <tr>
+                  <td>大闸蟹</td>
+                  <td>20260304</td>
+                  <td><span class="qc-status-tag qc-status-pass">合格</span></td>
+                  <td>03-04</td>
+                </tr>
+                <tr>
+                  <td>草鱼</td>
+                  <td>20260305</td>
+                  <td><span class="qc-status-tag qc-status-pass">合格</span></td>
+                  <td>03-05</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- Supplier Rating -->
+          <div class="qc-panel flex-40">
+            <div class="qc-panel-header">
+              <span class="qc-panel-title">投入品供应商评级</span>
+            </div>
+            <div class="ranking-list supplier-ranking" style="overflow-y: auto; padding-right: 5px;">
+              <div class="ranking-item">
+                <div class="rank-badge rank-gold">A</div>
+                <div class="ranking-info">
+                  <div class="rank-name">绿源生物科技</div>
+                  <div class="rank-value">98分</div>
+                </div>
+              </div>
+              <div class="ranking-item">
+                <div class="rank-badge rank-gold">A</div>
+                <div class="ranking-info">
+                  <div class="rank-name">通威饲料</div>
+                  <div class="rank-value">97分</div>
+                </div>
+              </div>
+              <div class="ranking-item">
+                <div class="rank-badge rank-silver">B</div>
+                <div class="ranking-info">
+                  <div class="rank-name">海大集团</div>
+                  <div class="rank-value">92分</div>
+                </div>
+              </div>
+              <div class="ranking-item">
+                <div class="rank-badge rank-silver">B</div>
+                <div class="ranking-info">
+                  <div class="rank-name">正大水产</div>
+                  <div class="rank-value">90分</div>
+                </div>
+              </div>
+              <div class="ranking-item">
+                <div class="rank-badge rank-silver">B</div>
+                <div class="ranking-info">
+                  <div class="rank-name">粤海饲料</div>
+                  <div class="rank-value">89分</div>
+                </div>
+              </div>
+              <div class="ranking-item">
+                <div class="rank-badge rank-bronze">C</div>
+                <div class="ranking-info">
+                  <div class="rank-name">恒兴股份</div>
+                  <div class="rank-value">85分</div>
+                </div>
+              </div>
+              <div class="ranking-item">
+                <div class="rank-badge rank-bronze">C</div>
+                <div class="ranking-info">
+                  <div class="rank-name">天邦股份</div>
+                  <div class="rank-value">82分</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Center Column -->
+        <div class="col right-column">
+          <!-- Traceability Map Area -->
+          <div class="map-container flex-60 qc-center-showcase">
+            <div class="qc-top-section">
+              <div class="qc-showcase-header">
+                <div class="qc-showcase-title">质量风险数字看板</div>
+                <div class="qc-showcase-subtitle">
+                  批次在线预警 · 关键点闭环跟踪
+                </div>
+              </div>
+              <div class="qc-command-row">
+                <div class="qc-command-chip active">
+                  <i class="ri-shield-check-line"></i>
+                  <span>合规总览</span>
+                </div>
+                <div class="qc-command-chip">
+                  <i class="ri-radar-line"></i>
+                  <span>风险雷达</span>
+                </div>
+                <div class="qc-command-chip">
+                  <i class="ri-flask-line"></i>
+                  <span>实验室联动</span>
+                </div>
+                <div class="qc-command-chip">
+                  <i class="ri-links-line"></i>
+                  <span>追溯链路</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="qc-kpi-row">
+              <div class="qc-kpi-card">
+                <div class="qc-kpi-header">
+                  <i class="ri-vial-line qc-kpi-icon"></i>
+                  <div class="qc-kpi-label">今日抽检批次</div>
+                </div>
+                <div class="qc-kpi-content">
+                  <div class="qc-kpi-value">26</div>
+                  <div class="qc-kpi-trend up">+3</div>
+                </div>
+              </div>
+              <div class="qc-kpi-card">
+                <div class="qc-kpi-header">
+                  <i class="ri-alarm-warning-line qc-kpi-icon"></i>
+                  <div class="qc-kpi-label">高风险批次</div>
+                </div>
+                <div class="qc-kpi-content">
+                  <div class="qc-kpi-value">2</div>
+                  <div class="qc-kpi-trend down">-1</div>
+                </div>
+              </div>
+              <div class="qc-kpi-card">
+                <div class="qc-kpi-header">
+                  <i class="ri-checkbox-circle-line qc-kpi-icon"></i>
+                  <div class="qc-kpi-label">复检完成率</div>
+                </div>
+                <div class="qc-kpi-content">
+                  <div class="qc-kpi-value">92%</div>
+                  <div class="qc-kpi-trend up">+4%</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="qc-dashboard-grid">
+              <!-- Risk Matrix Panel -->
+              <div class="qc-dashboard-card risk-panel">
+                <div class="qc-card-header">
+                  <i class="ri-shield-check-line"></i>
+                  <span>风险矩阵评估</span>
+                </div>
+                <div class="qc-risk-matrix">
+                  <div class="qc-risk-row">
+                    <span class="qc-risk-label">药残风险</span>
+                    <div class="qc-risk-bar"><span style="width: 28%"></span></div>
+                    <span class="qc-risk-value">低</span>
+                  </div>
+                  <div class="qc-risk-row">
+                    <span class="qc-risk-label">微生物风险</span>
+                    <div class="qc-risk-bar"><span style="width: 46%"></span></div>
+                    <span class="qc-risk-value">中</span>
+                  </div>
+                  <div class="qc-risk-row">
+                    <span class="qc-risk-label">重金属风险</span>
+                    <div class="qc-risk-bar"><span style="width: 15%"></span></div>
+                    <span class="qc-risk-value">低</span>
+                  </div>
+                  <div class="qc-risk-row">
+                    <span class="qc-risk-label">水质风险</span>
+                    <div class="qc-risk-bar"><span style="width: 35%"></span></div>
+                    <span class="qc-risk-value">低</span>
+                  </div>
+                  <div class="qc-risk-row">
+                    <span class="qc-risk-label">冷链风险</span>
+                    <div class="qc-risk-bar"><span style="width: 62%"></span></div>
+                    <span class="qc-risk-value">关注</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Live Feed Panel -->
+              <div class="qc-dashboard-card live-panel">
+                <div class="qc-card-header">
+                  <i class="ri-live-line"></i>
+                  <span>实时质控动态</span>
+                </div>
+                <div class="qc-live-list">
+                  <div class="qc-live-item high">
+                    <i class="ri-error-warning-line"></i>
+                    <div>
+                      <div>北区B-07塘 亚硝酸盐预警</div>
+                      <small>1分钟前</small>
+                    </div>
+                  </div>
+                  <div class="qc-live-item medium">
+                    <i class="ri-timer-flash-line"></i>
+                    <div>
+                      <div>批次P202603-08 冷链复核倒计时</div>
+                      <small>4分钟前</small>
+                    </div>
+                  </div>
+                  <div class="qc-live-item low">
+                    <i class="ri-flask-line"></i>
+                    <div>
+                      <div>包装线#2 抽样检测完成</div>
+                      <small>9分钟前</small>
+                    </div>
+                  </div>
+                </div>
+              </div>
+                
+              <!-- Flow Track Panel -->
+              <div class="qc-dashboard-card flow-panel">
+                <div class="qc-card-header">
+                  <i class="ri-links-line"></i>
+                  <span>全流程闭环跟踪</span>
+                </div>
+                <div class="qc-flow-track">
+                  <div class="qc-flow-node done">
+                    <div class="qc-flow-dot"></div>
+                    <div class="qc-flow-text">采样</div>
+                  </div>
+                  <div class="qc-flow-node done">
+                    <div class="qc-flow-dot"></div>
+                    <div class="qc-flow-text">检测</div>
+                  </div>
+                  <div class="qc-flow-node processing">
+                    <div class="qc-flow-dot"></div>
+                    <div class="qc-flow-text">复核</div>
+                  </div>
+                  <div class="qc-flow-node waiting">
+                    <div class="qc-flow-dot"></div>
+                    <div class="qc-flow-text">整改</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Bottom Alerts -->
+            <div class="qc-alert-list">
+              <div class="qc-alert-item high">
+                <div class="qc-alert-left">
+                  <i class="ri-alarm-warning-line"></i>
+                  <span>北区B-07塘：亚硝酸盐超阈值</span>
+                </div>
+                <span class="qc-alert-time">10:36</span>
+              </div>
+              <div class="qc-alert-item medium">
+                <div class="qc-alert-left">
+                  <i class="ri-error-warning-line"></i>
+                  <span>饲料批次F202603-11：需二次复检</span>
+                </div>
+                <span class="qc-alert-time">11:05</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Monitor Row -->
+          <div class="monitor-row flex-40">
+            <!-- Production Environment Monitoring -->
+            <!-- Replaced with specialized panel: QC Task List -->
+            <div class="qc-panel flex-45">
+              <div class="qc-panel-header">
+                <span class="qc-panel-title">质控任务进度</span>
+              </div>
+              <div class="qc-center-showcase" style="background: transparent; border: none; box-shadow: none; padding: 0;">
+                <div class="qc-showcase-header">
+                  <div class="qc-showcase-subtitle">总体达标率</div>
+                  <h3 class="qc-showcase-title">98.5%</h3>
+                </div>
+                <div class="qc-command-row" style="margin-top: -15px;">
+                  <div class="qc-command-chip active">
+                    <i class="ri-check-line"></i> 已完成
+                  </div>
+                  <div class="qc-command-chip">
+                    <i class="ri-loader-4-line"></i> 进行中
+                  </div>
+                  <div class="qc-command-chip">
+                    <i class="ri-time-line"></i> 待开始
+                  </div>
+                </div>
+                <!-- Reusing env signal items for progress bars -->
+                <div class="qc-progress-list">
+                  <div class="qc-progress-item">
+                    <div class="qc-progress-head">
+                      <span>入库检疫</span>
+                      <span>100%</span>
+                    </div>
+                    <div class="qc-progress-track">
+                      <div class="qc-progress-bar" style="width: 100%"></div>
+                    </div>
+                  </div>
+                  <div class="qc-progress-item">
+                    <div class="qc-progress-head">
+                      <span>生产巡检</span>
+                      <span>92%</span>
+                    </div>
+                    <div class="qc-progress-track">
+                      <div class="qc-progress-bar warning" style="width: 92%"></div>
+                    </div>
+                  </div>
+                  <div class="qc-progress-item">
+                    <div class="qc-progress-head">
+                      <span>出塘检测</span>
+                      <span>58%</span>
+                    </div>
+                    <div class="qc-progress-track">
+                      <div class="qc-progress-bar danger" style="width: 58%"></div>
+                    </div>
+                  </div>
+                  <div class="qc-progress-item">
+                    <div class="qc-progress-head">
+                      <span>采后暂养密度</span>
+                      <span>关注</span>
+                    </div>
+                    <div class="qc-progress-track">
+                      <div class="qc-progress-bar warning" style="width: 61%"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Pending Inspection Tasks -->
+            <div class="qc-panel flex-55">
+              <div class="qc-panel-header">
+                <span class="qc-panel-title">待检任务列表</span>
+                <div class="header-actions">
+                  <button class="qc-toggle-btn">全部</button>
+                </div>
+              </div>
+              <div class="task-summary-row">
+                <div class="task-summary-card">
+                  <i class="ri-error-warning-line" style="color: #ff6b6b;"></i>
+                  <span>高优先级 3</span>
+                </div>
+                <div class="task-summary-card">
+                  <i class="ri-time-line" style="color: #ffd166;"></i>
+                  <span>2小时内 5</span>
+                </div>
+                <div class="task-summary-card">
+                  <i class="ri-user-star-line" style="color: #45e8a5;"></i>
+                  <span>待指派 2</span>
+                </div>
+              </div>
+              <div class="task-list">
+                <div class="task-item high-priority">
+                  <div class="task-icon"><i class="ri-flask-line"></i></div>
+                  <div class="task-content">
+                    <div class="task-title">A区3号塘出苗检测</div>
+                    <div class="task-meta">批次A-20260315 · 责任人 张工</div>
+                    <div class="task-time">剩余: 2小时</div>
+                  </div>
+                  <div class="task-status">待采样</div>
+                </div>
+                <div class="task-item medium-priority">
+                  <div class="task-icon"><i class="ri-drop-line"></i></div>
+                  <div class="task-content">
+                    <div class="task-title">B区进水口水质复测</div>
+                    <div class="task-meta">批次B-20260315 · 责任人 李工</div>
+                    <div class="task-time">剩余: 4小时</div>
+                  </div>
+                  <div class="task-status">检测中</div>
+                </div>
+                <div class="task-item">
+                  <div class="task-icon"><i class="ri-truck-line"></i></div>
+                  <div class="task-content">
+                    <div class="task-title">新批次饲料入库抽检</div>
+                    <div class="task-meta">批次F-20260316 · 责任人 赵工</div>
+                    <div class="task-time">明天 09:00</div>
+                  </div>
+                  <div class="task-status">待指派</div>
+                </div>
+                <div class="task-item">
+                  <div class="task-icon">
+                    <i class="ri-shopping-bag-3-line"></i>
+                  </div>
+                  <div class="task-content">
+                    <div class="task-title">成品包装密封性抽查</div>
+                    <div class="task-meta">批次P-20260316 · 责任人 王工</div>
+                    <div class="task-time">明天 14:00</div>
+                  </div>
+                  <div class="task-status">计划中</div>
+                </div>
+                <div class="task-item medium-priority">
+                  <div class="task-icon">
+                    <i class="ri-microscope-line"></i>
+                  </div>
+                  <div class="task-content">
+                    <div class="task-title">C区尾水排放指标抽测</div>
+                    <div class="task-meta">批次W-20260316 · 责任人 陈工</div>
+                    <div class="task-time">明天 16:20</div>
+                  </div>
+                  <div class="task-status">待执行</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <script src="https://cdn.bootcdn.net/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/chartjs-plugin-annotation/3.0.1/chartjs-plugin-annotation.min.js"></script>
+    <script src="js/charts.js"></script>
+    <script src="js/main.js"></script>
+    <script>
+      // Update time
+      function updateTime() {
+        const now = new Date();
+        const timeString =
+          now.getFullYear() +
+          "-" +
+          String(now.getMonth() + 1).padStart(2, "0") +
+          "-" +
+          String(now.getDate()).padStart(2, "0") +
+          " " +
+          String(now.getHours()).padStart(2, "0") +
+          ":" +
+          String(now.getMinutes()).padStart(2, "0");
+        document.getElementById("datetime").textContent = timeString;
+      }
+      setInterval(updateTime, 1000);
+      updateTime();
+    </script>
+  </body>
+</html>

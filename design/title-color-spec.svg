@@ -1,0 +1,32 @@
+<svg width="1400" height="900" viewBox="0 0 1400 900" fill="none" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<linearGradient id="titleMain" x1="180" y1="215" x2="780" y2="215" gradientUnits="userSpaceOnUse">
+<stop stop-color="#0A1E32"/>
+<stop offset="1" stop-color="#00B4FF"/>
+</linearGradient>
+<linearGradient id="titleNight" x1="180" y1="415" x2="780" y2="415" gradientUnits="userSpaceOnUse">
+<stop stop-color="#00B4FF"/>
+<stop offset="1" stop-color="#00E5FF"/>
+</linearGradient>
+</defs>
+<rect width="1400" height="900" fill="#040F1D"/>
+<text x="80" y="80" font-family="Microsoft YaHei, sans-serif" font-size="34" fill="#D7F2FF">标题区域颜色规范标注</text>
+<rect x="80" y="130" width="800" height="110" rx="8" fill="#0B243A" fill-opacity="0.58" stroke="#00B4FF" stroke-opacity="0.4"/>
+<text x="120" y="202" font-family="DIN Alternate, Microsoft YaHei, sans-serif" font-size="44" font-weight="600" letter-spacing="3" fill="url(#titleMain)">“泽鳌飞兴”水产园区智慧平台</text>
+<text x="910" y="180" font-family="Microsoft YaHei, sans-serif" font-size="24" fill="#9BDFFF">主标题渐变</text>
+<text x="910" y="216" font-family="Microsoft YaHei, sans-serif" font-size="20" fill="#9BDFFF">起始：#0A1E32</text>
+<text x="910" y="250" font-family="Microsoft YaHei, sans-serif" font-size="20" fill="#9BDFFF">终止：#00B4FF</text>
+<text x="910" y="284" font-family="Microsoft YaHei, sans-serif" font-size="20" fill="#9BDFFF">动画：90°，6s，1次</text>
+<rect x="80" y="330" width="800" height="110" rx="8" fill="#071523" fill-opacity="0.76" stroke="#00B4FF" stroke-opacity="0.48"/>
+<text x="120" y="402" font-family="DIN Alternate, Microsoft YaHei, sans-serif" font-size="44" font-weight="600" letter-spacing="3" fill="url(#titleNight)">“泽鳌飞兴”水产园区智慧平台</text>
+<text x="910" y="380" font-family="Microsoft YaHei, sans-serif" font-size="24" fill="#9BDFFF">夜间模式</text>
+<text x="910" y="416" font-family="Microsoft YaHei, sans-serif" font-size="20" fill="#9BDFFF">文字：#00E5FF</text>
+<text x="910" y="450" font-family="Microsoft YaHei, sans-serif" font-size="20" fill="#9BDFFF">框体：深色毛玻璃 + 16px 模糊</text>
+<text x="80" y="560" font-family="Microsoft YaHei, sans-serif" font-size="28" fill="#D7F2FF">备选饱和度方案</text>
+<rect x="80" y="600" width="200" height="88" rx="8" fill="url(#titleMain)"/>
+<text x="80" y="734" font-family="Microsoft YaHei, sans-serif" font-size="20" fill="#9BDFFF">A 标准：#0A1E32 → #00B4FF</text>
+<rect x="450" y="600" width="200" height="88" rx="8" fill="url(#titleNight)"/>
+<text x="450" y="734" font-family="Microsoft YaHei, sans-serif" font-size="20" fill="#9BDFFF">B 高亮：#00B4FF → #00E5FF</text>
+<rect x="820" y="600" width="200" height="88" rx="8" fill="#1D4E69"/>
+<text x="820" y="734" font-family="Microsoft YaHei, sans-serif" font-size="20" fill="#9BDFFF">C 低饱和：#0D2940 → #27C5FF</text>
+</svg>

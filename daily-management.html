@@ -1,0 +1,935 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>浦江源水产园区智慧平台 - 日常管理</title>
+    <link rel="preconnect" href="https://cdn.bootcdn.net" />
+    <link rel="preconnect" href="https://fonts.loli.net" />
+    <link
+      href="https://cdn.bootcdn.net/ajax/libs/remixicon/3.5.0/remixicon.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.loli.net/css2?family=Rajdhani:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/main.css" />
+    <link rel="stylesheet" href="css/components.css" />
+    <link rel="stylesheet" href="css/pages.css" />
+  </head>
+  <body>
+    <div class="dashboard-container">
+      <!-- Header -->
+      <header class="header">
+        <!-- Left Navigation Group -->
+        <div class="nav-group nav-left">
+          <a href="index.html" class="nav-tab nav-tab-left">
+            <span>园区总览</span>
+          </a>
+          <a href="smart-farming.html" class="nav-tab nav-tab-left">
+            <span>智慧养殖</span>
+          </a>
+        </div>
+
+        <!-- Center Title -->
+        <div class="header-title-container">
+          <div class="header-title">“泽鳌飞兴”水产园区智慧平台</div>
+        </div>
+
+        <!-- Right Navigation Group -->
+        <div class="nav-group nav-right">
+          <a href="quality-control.html" class="nav-tab nav-tab-right">
+            <span>质量控制</span>
+          </a>
+          <a href="daily-management.html" class="nav-tab nav-tab-right active">
+            <span>日常管理</span>
+          </a>
+        </div>
+        <div class="header-right-info">
+          <div id="weather-info"><i class="ri-sun-line"></i> 26°C</div>
+          <div id="datetime" aria-live="polite">2026-03-06 00:01</div>
+        </div>
+      </header>
+
+      <!-- Main Content -->
+      <main class="main-content layout-asym">
+        <!-- Left Column (70%) -->
+        <div class="col left-column">
+          <!-- Operation Monitoring Panel -->
+          <div class="panel flex-55 monitor-ops-panel">
+            <div class="panel-header">
+              <span class="panel-title">园区实时作业监控</span>
+              <div class="header-actions dm-ops-actions">
+                <span class="dm-live-badge">实时联动</span>
+                <button
+                  id="opsExpandAllBtn"
+                  type="button"
+                  class="history-btn dm-action-btn dm-collapse-all-btn"
+                  aria-pressed="false"
+                >
+                  展开全部
+                </button>
+              </div>
+            </div>
+            <div id="opsModulesScroll" class="ops-modules-scroll">
+              <div class="ops-core-grid">
+              <article class="ops-core-card" data-core="device">
+                <header class="ops-card-header">
+                  <h3 class="ops-card-title">在线设备</h3>
+                  <div class="ops-card-actions">
+                    <button
+                      type="button"
+                      class="dm-mini-btn"
+                      data-refresh="device"
+                    >
+                      刷新
+                    </button>
+                    <span class="ops-refresh-time" id="deviceRefreshTime"
+                      >刚刚更新</span
+                    >
+                  </div>
+                </header>
+                <div class="ops-core-main">
+                  <span id="onlineDeviceCount" class="ops-core-value">142</span>
+                  <span class="ops-core-unit">台在线 / 148台总数</span>
+                </div>
+                <div class="ops-chip-row">
+                  <span class="ops-chip">增氧机 56台</span>
+                  <span class="ops-chip">传感器 64台</span>
+                  <span class="ops-chip warn">离线 6台</span>
+                </div>
+                <div id="deviceAlertTip" class="ops-alert-tip is-warning">
+                  异常提示：2台增氧机离线待处理
+                </div>
+              </article>
+              <article class="ops-core-card" data-core="workorder">
+                <header class="ops-card-header">
+                  <h3 class="ops-card-title">处理中的工单</h3>
+                  <div class="ops-card-actions">
+                    <button
+                      type="button"
+                      class="dm-mini-btn"
+                      data-refresh="workorder"
+                    >
+                      刷新
+                    </button>
+                    <span class="ops-refresh-time" id="workorderRefreshTime"
+                      >刚刚更新</span
+                    >
+                  </div>
+                </header>
+                <div class="ops-core-main">
+                  <span id="processingWorkorderCount" class="ops-core-value"
+                    >9</span
+                  >
+                  <span class="ops-core-unit">单处理中</span>
+                </div>
+                <div class="ops-mini-list">
+                  <div class="ops-mini-item">
+                    <span>#8821 围网修复</span>
+                    <span>周工</span>
+                    <div class="ops-progress-bar">
+                      <span style="width: 68%"></span>
+                    </div>
+                  </div>
+                  <div class="ops-mini-item">
+                    <span>#8826 水泵检修</span>
+                    <span>机修班组</span>
+                    <div class="ops-progress-bar">
+                      <span style="width: 42%"></span>
+                    </div>
+                  </div>
+                </div>
+                <div id="workorderAlertTip" class="ops-alert-tip">
+                  状态正常：关键工单按计划推进
+                </div>
+              </article>
+              <article class="ops-core-card" data-core="patrol">
+                <header class="ops-card-header">
+                  <h3 class="ops-card-title">今日巡检完成率</h3>
+                  <div class="ops-card-actions">
+                    <button
+                      type="button"
+                      class="dm-mini-btn"
+                      data-refresh="patrol"
+                    >
+                      刷新
+                    </button>
+                    <span class="ops-refresh-time" id="patrolRefreshTime"
+                      >刚刚更新</span
+                    >
+                  </div>
+                </header>
+                <div class="ops-core-main">
+                  <span id="patrolRateValue" class="ops-core-value">96.8%</span>
+                  <span class="ops-core-unit">任务 121/125</span>
+                </div>
+                <div class="ops-rate-track" aria-label="巡检进度">
+                  <span id="patrolRateBar" style="width: 96.8%"></span>
+                </div>
+                <div class="ops-rate-bars" aria-hidden="true">
+                  <span style="height: 42%"></span>
+                  <span style="height: 58%"></span>
+                  <span style="height: 71%"></span>
+                  <span style="height: 86%"></span>
+                  <span style="height: 96%"></span>
+                </div>
+                <div id="patrolAlertTip" class="ops-alert-tip">
+                  状态正常：今日巡检完成率高于目标线
+                </div>
+              </article>
+              </div>
+              <div id="opsSecondaryGrid" class="ops-secondary-grid">
+              <article class="ops-module-card" data-module="workorder-history">
+                <header class="ops-card-header">
+                  <h4 class="ops-card-title">工单历史</h4>
+                  <div class="ops-card-actions">
+                    <button
+                      type="button"
+                      class="dm-mini-btn"
+                      data-refresh="workorder-history"
+                    >
+                      刷新
+                    </button>
+                    <button
+                      type="button"
+                      class="dm-mini-btn"
+                      data-collapse="workorder-history"
+                      aria-expanded="true"
+                    >
+                      收起
+                    </button>
+                  </div>
+                </header>
+                <div class="ops-module-body" data-body="workorder-history">
+                  <div class="ops-history-list">
+                    <div class="ops-history-row" data-type="network">
+                      <span>#8702 网络优化</span><span>已完成</span>
+                    </div>
+                    <div class="ops-history-row" data-type="pump">
+                      <span>#8728 泵机过热处置</span><span>复核中</span>
+                    </div>
+                    <div class="ops-history-row" data-type="sensor">
+                      <span>#8789 传感器更换</span><span>已派单</span>
+                    </div>
+                  </div>
+                </div>
+              </article>
+              <article class="ops-module-card" data-module="alarm">
+                <header class="ops-card-header">
+                  <h4 class="ops-card-title">告警记录</h4>
+                  <div class="ops-card-actions">
+                    <button
+                      type="button"
+                      class="dm-mini-btn"
+                      data-refresh="alarm"
+                    >
+                      刷新
+                    </button>
+                    <button
+                      type="button"
+                      class="dm-mini-btn"
+                      data-collapse="alarm"
+                      aria-expanded="true"
+                    >
+                      收起
+                    </button>
+                  </div>
+                </header>
+                <div class="ops-module-body" data-body="alarm">
+                  <div class="ops-alarm-list" id="alarmLinkList">
+                    <button type="button" class="ops-alarm-item is-active" data-link="network">
+                      <span>网络抖动预警</span><span class="ops-level warn">中风险</span>
+                    </button>
+                    <button type="button" class="ops-alarm-item" data-link="pump">
+                      <span>2号泵房温升异常</span><span class="ops-level high">高风险</span>
+                    </button>
+                    <button type="button" class="ops-alarm-item" data-link="sensor">
+                      <span>传感器离线</span><span class="ops-level warn">中风险</span>
+                    </button>
+                  </div>
+                </div>
+              </article>
+              <article class="ops-module-card" data-module="history">
+                <header class="ops-card-header">
+                  <h4 class="ops-card-title">设备历史数据</h4>
+                  <div class="ops-card-actions">
+                    <button
+                      type="button"
+                      class="dm-mini-btn"
+                      data-refresh="history"
+                    >
+                      刷新
+                    </button>
+                    <button
+                      type="button"
+                      class="dm-mini-btn"
+                      data-collapse="history"
+                      aria-expanded="true"
+                    >
+                      收起
+                    </button>
+                  </div>
+                </header>
+                <div class="ops-module-body" data-body="history">
+                  <ul class="ops-timeline-list">
+                    <li><span>08:20</span><span>增氧机群负载 73%</span></li>
+                    <li><span>10:40</span><span>传感器包丢失率 0.6%</span></li>
+                    <li><span>13:15</span><span>视频终端在线率 97.9%</span></li>
+                  </ul>
+                </div>
+              </article>
+              <article class="ops-module-card" data-module="analysis">
+                <header class="ops-card-header">
+                  <h4 class="ops-card-title">统计分析</h4>
+                  <div class="ops-card-actions">
+                    <button
+                      type="button"
+                      class="dm-mini-btn"
+                      data-refresh="analysis"
+                    >
+                      刷新
+                    </button>
+                    <button
+                      type="button"
+                      class="dm-mini-btn"
+                      data-collapse="analysis"
+                      aria-expanded="true"
+                    >
+                      收起
+                    </button>
+                  </div>
+                </header>
+                <div class="ops-module-body" data-body="analysis">
+                  <div class="ops-stat-grid">
+                    <div class="ops-stat-item">
+                      <span>平均响应时长</span>
+                      <strong id="analysisResponse">14m</strong>
+                    </div>
+                    <div class="ops-stat-item">
+                      <span>高风险占比</span>
+                      <strong id="analysisHighRisk">9%</strong>
+                    </div>
+                    <div class="ops-stat-item">
+                      <span>联动焦点</span>
+                      <strong id="analysisFocus">网络告警</strong>
+                    </div>
+                  </div>
+                </div>
+              </article>
+              <article class="ops-module-card" data-module="settings">
+                <header class="ops-card-header">
+                  <h4 class="ops-card-title">系统设置</h4>
+                  <div class="ops-card-actions">
+                    <button
+                      type="button"
+                      class="dm-mini-btn"
+                      data-refresh="settings"
+                    >
+                      刷新
+                    </button>
+                    <button
+                      type="button"
+                      class="dm-mini-btn"
+                      data-collapse="settings"
+                      aria-expanded="true"
+                    >
+                      收起
+                    </button>
+                  </div>
+                </header>
+                <div class="ops-module-body" data-body="settings">
+                  <div class="ops-setting-list">
+                    <label class="ops-setting-item"
+                      ><span>自动刷新</span><input checked type="checkbox"
+                    /></label>
+                    <label class="ops-setting-item"
+                      ><span>异常弹窗</span><input checked type="checkbox"
+                    /></label>
+                    <label class="ops-setting-item"
+                      ><span>联动策略</span>
+                      <select>
+                        <option>智能推荐</option>
+                        <option>仅告警驱动</option>
+                        <option>手动模式</option>
+                      </select>
+                    </label>
+                  </div>
+                </div>
+              </article>
+              <article class="ops-module-card" data-module="dispatch">
+                <header class="ops-card-header">
+                  <h4 class="ops-card-title">应急调度模块</h4>
+                  <div class="ops-card-actions">
+                    <button
+                      type="button"
+                      class="dm-mini-btn"
+                      data-refresh="dispatch"
+                    >
+                      刷新
+                    </button>
+                    <button
+                      type="button"
+                      class="dm-mini-btn"
+                      data-collapse="dispatch"
+                      aria-expanded="true"
+                    >
+                      收起
+                    </button>
+                  </div>
+                </header>
+                <div class="ops-module-body" data-body="dispatch">
+                  <div class="ops-dispatch-grid">
+                    <div class="ops-dispatch-item">
+                      <span>待调度任务</span>
+                      <strong id="dispatchQueueCount">5</strong>
+                    </div>
+                    <div class="ops-dispatch-item">
+                      <span>可用班组</span>
+                      <strong id="dispatchTeamLoad">7组</strong>
+                    </div>
+                    <div class="ops-dispatch-item">
+                      <span>调度响应</span>
+                      <strong id="dispatchLatency">1.8m</strong>
+                    </div>
+                  </div>
+                  <div id="dispatchStatusTip" class="ops-alert-tip">
+                    状态正常：调度资源充足
+                  </div>
+                </div>
+              </article>
+              </div>
+            </div>
+            <div class="panel-corner-bl"></div>
+            <div class="panel-corner-br"></div>
+          </div>
+
+          <!-- Monitor Row -->
+          <div class="monitor-row flex-45">
+            <!-- Energy Consumption Panel -->
+            <div class="panel flex-1">
+              <div class="panel-header">
+                <span class="panel-title">能耗趋势分析</span>
+                <div class="header-actions dm-energy-actions">
+                  <button
+                    id="energyExportBtn"
+                    type="button"
+                    class="dm-energy-export-btn"
+                    aria-label="导出能耗数据"
+                  >
+                    导出CSV
+                  </button>
+                  <div id="energyToggle" class="toggle-group dm-toggle-group">
+                    <button type="button" class="active" aria-pressed="true">同比</button>
+                    <button type="button" aria-pressed="false">环比</button>
+                  </div>
+                </div>
+              </div>
+              <div class="chart-container dm-chart-wrap">
+                <canvas
+                  id="energyChart"
+                  role="img"
+                  aria-label="园区能耗趋势图"
+                ></canvas>
+              </div>
+              <div class="panel-corner-bl"></div>
+              <div class="panel-corner-br"></div>
+            </div>
+            <!-- Inventory Panel -->
+            <div class="panel flex-1">
+              <div class="panel-header">
+                <span class="panel-title">物资库存预警</span>
+                <div class="header-actions">
+                  <select
+                    id="inventoryFilter"
+                    class="chart-filter dm-filter-select"
+                    aria-label="物资分类筛选"
+                  >
+                    <option value="all">全类</option>
+                    <option value="feed">饲料</option>
+                    <option value="drug">药品</option>
+                  </select>
+                </div>
+              </div>
+              <div class="chart-container dm-chart-wrap">
+                <canvas
+                  id="inventoryChart"
+                  role="img"
+                  aria-label="物资库存预警图"
+                ></canvas>
+              </div>
+              <div class="panel-corner-bl"></div>
+              <div class="panel-corner-br"></div>
+            </div>
+            <!-- Attendance Panel -->
+            <div class="panel flex-1">
+              <div class="panel-header">
+                <span class="panel-title">今日人员考勤</span>
+                <div class="header-actions">
+                  <span class="dm-live-badge">实时</span>
+                </div>
+              </div>
+              <div class="chart-container dm-chart-wrap">
+                <canvas
+                  id="attendanceChart"
+                  role="img"
+                  aria-label="今日人员考勤统计图"
+                ></canvas>
+                <div id="attendanceCenterText" class="attendance-center-text">
+                  <div class="attendance-rate">98%</div>
+                  <div class="attendance-label">出勤率</div>
+                </div>
+              </div>
+              <div class="panel-corner-bl"></div>
+              <div class="panel-corner-br"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Column (30%) -->
+        <div class="col right-column">
+          <!-- Work Log Panel -->
+          <div class="panel flex-25">
+            <div class="panel-header">
+              <span class="panel-title">今日作业日志</span>
+              <div class="header-actions">
+                <span class="dm-kpi-badge">完成率 86%</span>
+                <span class="history-btn">更多</span>
+              </div>
+            </div>
+            <div class="work-log-list" role="list" aria-label="今日作业日志列表">
+              <div class="work-log-item" role="listitem">
+                <div class="log-time">08:30</div>
+                <div class="log-content">完成北区1-10号塘口晨间巡查</div>
+                <div class="log-user">张建国</div>
+              </div>
+              <div class="work-log-item" role="listitem">
+                <div class="log-time">09:15</div>
+                <div class="log-content">投放成蟹饲料3号配方500kg</div>
+                <div class="log-user">李明</div>
+              </div>
+              <div class="work-log-item" role="listitem">
+                <div class="log-time">10:40</div>
+                <div class="log-content">更换2号增氧机叶轮</div>
+                <div class="log-user">王大力</div>
+              </div>
+              <div class="work-log-item" role="listitem">
+                <div class="log-time">13:20</div>
+                <div class="log-content">检测东区水质样本(PH/氨氮)</div>
+                <div class="log-user">赵敏</div>
+              </div>
+              <div class="work-log-item" role="listitem">
+                <div class="log-time">15:00</div>
+                <div class="log-content">接待市农业局专家组视察</div>
+                <div class="log-user">孙总</div>
+              </div>
+              <div class="work-log-item" role="listitem">
+                <div class="log-time">16:45</div>
+                <div class="log-content">开启全区自动增氧系统</div>
+                <div class="log-user">系统</div>
+              </div>
+              <div class="work-log-item" role="listitem">
+                <div class="log-time">17:15</div>
+                <div class="log-content">完成B-03塘清淤复核并归档工单</div>
+                <div class="log-user">周工</div>
+              </div>
+            </div>
+            <div class="panel-corner-bl"></div>
+            <div class="panel-corner-br"></div>
+          </div>
+          <!-- Maintenance Plan Panel -->
+          <div class="panel flex-30">
+            <div class="panel-header">
+              <span class="panel-title">设备维保计划</span>
+              <div class="header-actions">
+                <span class="dm-kpi-badge">准点率 98.2%</span>
+              </div>
+            </div>
+            <div class="maintenance-list" role="list" aria-label="设备维保计划列表">
+              <div class="m-item urgent" role="listitem">
+                <div class="m-header">
+                  <span class="m-title">2号水泵房电机检修</span>
+                  <span class="m-date">2026-03-07</span>
+                </div>
+                <div class="m-meta-row">
+                  <span class="m-owner">负责人：机修班组</span>
+                  <span class="m-level high">高风险</span>
+                </div>
+                <div class="m-desc">
+                  电机运行声音异常，需停机检查轴承及线圈。
+                </div>
+              </div>
+              <div class="m-item" role="listitem">
+                <div class="m-header">
+                  <span class="m-title">全区增氧机线路巡检</span>
+                  <span class="m-date">2026-03-10</span>
+                </div>
+                <div class="m-meta-row">
+                  <span class="m-owner">负责人：电工班组</span>
+                  <span class="m-level medium">中风险</span>
+                </div>
+                <div class="m-desc">
+                  季度例行检查，重点排查线路老化及漏电隐患。
+                </div>
+              </div>
+              <div class="m-item" role="listitem">
+                <div class="m-header">
+                  <span class="m-title">视频监控系统升级</span>
+                  <span class="m-date">2026-03-15</span>
+                </div>
+                <div class="m-meta-row">
+                  <span class="m-owner">负责人：信息化组</span>
+                  <span class="m-level low">低风险</span>
+                </div>
+                <div class="m-desc">
+                  存储服务器固件升级，预计中断服务2小时。
+                </div>
+              </div>
+              <div class="m-item" role="listitem">
+                <div class="m-header">
+                  <span class="m-title">水质传感器校准</span>
+                  <span class="m-date">2026-03-20</span>
+                </div>
+                <div class="m-meta-row">
+                  <span class="m-owner">负责人：检测中心</span>
+                  <span class="m-level medium">中风险</span>
+                </div>
+                <div class="m-desc">
+                  对C区所有PH及溶氧传感器进行标准液校准。
+                </div>
+              </div>
+            </div>
+            <div class="panel-corner-bl"></div>
+            <div class="panel-corner-br"></div>
+          </div>
+          <!-- Patrol Records Panel -->
+          <div class="panel flex-45">
+            <div class="panel-header">
+              <span class="panel-title">巡塘事件处置</span>
+              <div class="header-actions">
+                <button type="button" class="history-btn dm-action-btn">
+                  上报
+                </button>
+              </div>
+            </div>
+            <div class="patrol-grid" role="list" aria-label="巡塘事件处置记录">
+              <div class="patrol-card" role="listitem">
+                <div class="patrol-img">
+                  <img
+                    src="images/监控1.png"
+                    loading="lazy"
+                    decoding="async"
+                    alt="北区12号塘围网破损现场"
+                  />
+                </div>
+                <div class="patrol-info">
+                  <div class="patrol-loc">北区12号塘</div>
+                  <div class="patrol-res status-issue">发现围网破损</div>
+                  <div class="patrol-note">
+                    已派工单处理 #8821
+                  </div>
+                </div>
+              </div>
+              <div class="patrol-card" role="listitem">
+                <div class="patrol-img">
+                  <img
+                    src="images/监控2.png"
+                    loading="lazy"
+                    decoding="async"
+                    alt="东区进水口拦污栅堵塞现场"
+                  />
+                </div>
+                <div class="patrol-info">
+                  <div class="patrol-loc">东区进水口</div>
+                  <div class="patrol-res status-issue">拦污栅堵塞</div>
+                  <div class="patrol-note">
+                    需人工清理
+                  </div>
+                </div>
+              </div>
+              <div class="patrol-card" role="listitem">
+                <div class="patrol-img">
+                  <img
+                    src="images/监控1.png"
+                    loading="lazy"
+                    decoding="async"
+                    alt="南区3号闸口阀门复检现场"
+                  />
+                </div>
+                <div class="patrol-info">
+                  <div class="patrol-loc">南区3号闸口</div>
+                  <div class="patrol-res status-ok">阀门渗漏已修复</div>
+                  <div class="patrol-note">
+                    闭环确认，复检通过
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="panel-corner-bl"></div>
+            <div class="panel-corner-br"></div>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <script src="https://cdn.bootcdn.net/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+    <script src="js/charts.js"></script>
+    <script src="js/main.js"></script>
+    <script>
+      function enableVerticalCarousel(selector, speed) {
+        const container = document.querySelector(selector);
+        if (!container) return;
+        if (window.matchMedia("(prefers-reduced-motion: reduce)").matches)
+          return;
+
+        let paused = false;
+        const loop = () => {
+          if (!paused) {
+            container.scrollTop += speed;
+            if (
+              container.scrollTop + container.clientHeight >=
+              container.scrollHeight - 1
+            ) {
+              container.scrollTop = 0;
+            }
+          }
+          requestAnimationFrame(loop);
+        };
+
+        container.addEventListener("mouseenter", () => {
+          paused = true;
+        });
+        container.addEventListener("mouseleave", () => {
+          paused = false;
+        });
+        container.addEventListener("focusin", () => {
+          paused = true;
+        });
+        container.addEventListener("focusout", () => {
+          paused = false;
+        });
+
+        loop();
+      }
+
+      enableVerticalCarousel(".work-log-list", 0.28);
+      enableVerticalCarousel(".maintenance-list", 0.3);
+      enableVerticalCarousel(".patrol-grid", 0.32);
+
+      function initOpsMonitorPanel() {
+        const refreshTimes = {
+          device: document.getElementById("deviceRefreshTime"),
+          workorder: document.getElementById("workorderRefreshTime"),
+          patrol: document.getElementById("patrolRefreshTime"),
+          dispatch: null,
+        };
+        const deviceCountNode = document.getElementById("onlineDeviceCount");
+        const workorderCountNode = document.getElementById(
+          "processingWorkorderCount"
+        );
+        const patrolRateNode = document.getElementById("patrolRateValue");
+        const patrolRateBar = document.getElementById("patrolRateBar");
+        const analysisResponse = document.getElementById("analysisResponse");
+        const analysisHighRisk = document.getElementById("analysisHighRisk");
+        const analysisFocus = document.getElementById("analysisFocus");
+        const deviceAlertTip = document.getElementById("deviceAlertTip");
+        const workorderAlertTip = document.getElementById("workorderAlertTip");
+        const patrolAlertTip = document.getElementById("patrolAlertTip");
+        const dispatchQueueCount = document.getElementById("dispatchQueueCount");
+        const dispatchTeamLoad = document.getElementById("dispatchTeamLoad");
+        const dispatchLatency = document.getElementById("dispatchLatency");
+        const dispatchStatusTip = document.getElementById("dispatchStatusTip");
+
+        function writeRefreshTime(key) {
+          const node = refreshTimes[key];
+          if (node) node.textContent = "刚刚更新";
+        }
+
+        function randomInRange(min, max) {
+          return Math.floor(Math.random() * (max - min + 1)) + min;
+        }
+
+        function refreshDevice() {
+          const onlineCount = randomInRange(138, 146);
+          const offlineCount = 148 - onlineCount;
+          if (deviceCountNode) deviceCountNode.textContent = String(onlineCount);
+          if (deviceAlertTip) {
+            if (offlineCount > 5) {
+              deviceAlertTip.classList.add("is-warning");
+              deviceAlertTip.textContent = `异常提示：${offlineCount}台设备离线待处理`;
+            } else {
+              deviceAlertTip.classList.remove("is-warning");
+              deviceAlertTip.textContent = "状态正常：设备在线率保持稳定";
+            }
+          }
+          writeRefreshTime("device");
+        }
+
+        function refreshWorkorder() {
+          const count = randomInRange(6, 12);
+          if (workorderCountNode) workorderCountNode.textContent = String(count);
+          if (workorderAlertTip) {
+            if (count >= 10) {
+              workorderAlertTip.classList.add("is-warning");
+              workorderAlertTip.textContent = "异常提示：处理中工单超阈值，请分配支援";
+            } else {
+              workorderAlertTip.classList.remove("is-warning");
+              workorderAlertTip.textContent = "状态正常：关键工单按计划推进";
+            }
+          }
+          writeRefreshTime("workorder");
+        }
+
+        function refreshPatrol() {
+          const rate = (Math.random() * 8 + 91).toFixed(1);
+          if (patrolRateNode) patrolRateNode.textContent = `${rate}%`;
+          if (patrolRateBar) patrolRateBar.style.width = `${rate}%`;
+          if (patrolAlertTip) {
+            if (Number(rate) < 95) {
+              patrolAlertTip.classList.add("is-warning");
+              patrolAlertTip.textContent = "异常提示：巡检进度低于目标线，请加快执行";
+            } else {
+              patrolAlertTip.classList.remove("is-warning");
+              patrolAlertTip.textContent = "状态正常：今日巡检完成率高于目标线";
+            }
+          }
+          writeRefreshTime("patrol");
+        }
+
+        function refreshAnalysis() {
+          if (analysisResponse) {
+            analysisResponse.textContent = `${randomInRange(11, 19)}m`;
+          }
+          if (analysisHighRisk) {
+            analysisHighRisk.textContent = `${randomInRange(7, 14)}%`;
+          }
+        }
+
+        function refreshDispatch() {
+          const queue = randomInRange(3, 11);
+          const teams = randomInRange(5, 9);
+          const latency = (Math.random() * 1.6 + 1.2).toFixed(1);
+          if (dispatchQueueCount) dispatchQueueCount.textContent = String(queue);
+          if (dispatchTeamLoad) dispatchTeamLoad.textContent = `${teams}组`;
+          if (dispatchLatency) dispatchLatency.textContent = `${latency}m`;
+          if (dispatchStatusTip) {
+            if (queue > 8 || teams < 6) {
+              dispatchStatusTip.classList.add("is-warning");
+              dispatchStatusTip.textContent = "异常提示：应急队列偏高，请触发跨区调度";
+            } else {
+              dispatchStatusTip.classList.remove("is-warning");
+              dispatchStatusTip.textContent = "状态正常：调度资源充足";
+            }
+          }
+        }
+
+        const refreshTargets = {
+          device: refreshDevice,
+          workorder: refreshWorkorder,
+          patrol: refreshPatrol,
+          history: () => {},
+          alarm: () => {},
+          "workorder-history": refreshWorkorder,
+          analysis: refreshAnalysis,
+          settings: () => {},
+          dispatch: refreshDispatch,
+        };
+
+        document.querySelectorAll("[data-refresh]").forEach((btn) => {
+          btn.addEventListener("click", () => {
+            const key = btn.getAttribute("data-refresh");
+            if (refreshTargets[key]) refreshTargets[key]();
+          });
+        });
+
+        document.querySelectorAll("[data-collapse]").forEach((btn) => {
+          btn.addEventListener("click", () => {
+            const key = btn.getAttribute("data-collapse");
+            const body = document.querySelector(`[data-body="${key}"]`);
+            if (!body) return;
+            const isCollapsed = body.classList.toggle("is-collapsed");
+            btn.textContent = isCollapsed ? "展开" : "收起";
+            btn.setAttribute("aria-expanded", String(!isCollapsed));
+          });
+        });
+
+        const expandAllBtn = document.getElementById("opsExpandAllBtn");
+        if (expandAllBtn) {
+          expandAllBtn.addEventListener("click", () => {
+            const shouldExpand = expandAllBtn.getAttribute("aria-pressed") === "false";
+            document.querySelectorAll("[data-collapse]").forEach((btn) => {
+              const key = btn.getAttribute("data-collapse");
+              const body = document.querySelector(`[data-body="${key}"]`);
+              if (!body) return;
+              body.classList.toggle("is-collapsed", !shouldExpand);
+              btn.textContent = shouldExpand ? "收起" : "展开";
+              btn.setAttribute("aria-expanded", String(shouldExpand));
+            });
+            expandAllBtn.textContent = shouldExpand ? "全部收起" : "展开全部";
+            expandAllBtn.setAttribute("aria-pressed", String(shouldExpand));
+          });
+        }
+
+        const alarmButtons = document.querySelectorAll("#alarmLinkList .ops-alarm-item");
+        const historyRows = document.querySelectorAll(".ops-history-row");
+        alarmButtons.forEach((btn) => {
+          btn.addEventListener("click", () => {
+            alarmButtons.forEach((item) => item.classList.remove("is-active"));
+            btn.classList.add("is-active");
+            const link = btn.getAttribute("data-link");
+            historyRows.forEach((row) => {
+              row.classList.toggle("is-linked", row.getAttribute("data-type") === link);
+            });
+            if (analysisFocus) {
+              const title = btn.querySelector("span");
+              analysisFocus.textContent = title ? title.textContent : "告警联动";
+            }
+            if (workorderAlertTip && link === "pump") {
+              workorderAlertTip.classList.add("is-warning");
+              workorderAlertTip.textContent = "异常提示：泵房告警联动工单已升级优先级";
+            }
+            if (dispatchStatusTip) {
+              if (link === "pump") {
+                dispatchStatusTip.classList.add("is-warning");
+                dispatchStatusTip.textContent =
+                  "异常提示：泵房事件触发应急调度，已锁定抢修班组";
+              } else {
+                dispatchStatusTip.classList.remove("is-warning");
+                dispatchStatusTip.textContent = "状态正常：调度资源充足";
+              }
+            }
+          });
+        });
+
+        setInterval(() => {
+          if (document.hidden) return;
+          refreshDevice();
+          refreshWorkorder();
+          refreshPatrol();
+          refreshAnalysis();
+          refreshDispatch();
+        }, 20000);
+      }
+
+      initOpsMonitorPanel();
+
+      function updateTime() {
+        const now = new Date();
+        const timeString =
+          now.getFullYear() +
+          "-" +
+          String(now.getMonth() + 1).padStart(2, "0") +
+          "-" +
+          String(now.getDate()).padStart(2, "0") +
+          " " +
+          String(now.getHours()).padStart(2, "0") +
+          ":" +
+          String(now.getMinutes()).padStart(2, "0");
+        document.getElementById("datetime").textContent = timeString;
+      }
+      setInterval(updateTime, 1000);
+      updateTime();
+    </script>
+  </body>
+</html>

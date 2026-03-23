@@ -1,0 +1,11 @@
+<svg width="120" height="120" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M12 2C16 2 20 5 21 9H17C16.5 7 15 5 12 5C8 5 5 8 5 12C5 16 8 19 12 19C16 19 19 16 19 12H22C22 18 17 22 12 22C6 22 2 17 2 12C2 7 6 2 12 2Z" fill="#A0A0A0"/>
+    <path d="M12 12L15 10L14 14L12 12Z" fill="#A0A0A0"/>
+    <path d="M12 12L9 14L10 10L12 12Z" fill="#A0A0A0"/>
+    <path d="M12 12L12 15L13 11L12 12Z" fill="#A0A0A0"/>
+    <circle cx="12" cy="12" r="3" fill="#A0A0A0"/>
+    <!-- Cutout parts using background color -->
+    <path d="M12 12L15 9L16 13L12 12Z" fill="#0A1A2F"/>
+    <path d="M12 12L9 9L8 13L12 12Z" fill="#0A1A2F"/>
+    <path d="M12 12L12 16L14 15L12 12Z" fill="#0A1A2F"/>
+</svg>

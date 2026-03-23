@@ -1,0 +1,580 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>浦江源水产园区智慧平台</title>
+    <link
+      href="https://cdn.bootcdn.net/ajax/libs/remixicon/3.5.0/remixicon.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.loli.net/css2?family=Rajdhani:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/main.css" />
+    <link rel="stylesheet" href="css/components.css" />
+    <link rel="stylesheet" href="css/pages.css" />
+  </head>
+  <body>
+    <div class="dashboard-container">
+      <!-- Header -->
+      <header class="header">
+        <!-- Left Navigation Group -->
+        <div class="nav-group nav-left">
+          <a href="index.html" class="nav-tab nav-tab-left active">
+            <span>园区总览</span>
+          </a>
+          <a href="smart-farming.html" class="nav-tab nav-tab-left">
+            <span>智慧养殖</span>
+          </a>
+        </div>
+
+        <!-- Center Title -->
+        <div class="header-title-container">
+          <div class="header-title">“泽鳌飞兴”水产园区智慧平台</div>
+        </div>
+
+        <!-- Right Navigation Group -->
+        <div class="nav-group nav-right">
+          <a href="quality-control.html" class="nav-tab nav-tab-right">
+            <span>质量控制</span>
+          </a>
+          <a href="daily-management.html" class="nav-tab nav-tab-right">
+            <span>日常管理</span>
+          </a>
+        </div>
+        <div class="header-right-info">
+          <div id="weather-info"><i class="ri-sun-line"></i> 26°C</div>
+          <div id="datetime">2026-03-06 00:01</div>
+        </div>
+      </header>
+
+      <!-- Main Content -->
+      <main class="main-content layout-balanced">
+        <!-- Left Column -->
+        <div class="col left-column">
+          <!-- Park Stats Panel -->
+          <div class="panel flex-30">
+            <div class="panel-header">
+              <span class="panel-title">园区概况</span>
+            </div>
+            <div class="stats-grid">
+              <div class="stat-card">
+                <div class="stat-icon"><i class="ri-map-2-line"></i></div>
+                <div class="stat-info">
+                  <div class="stat-value">2807<span class="unit">亩</span></div>
+                  <div class="stat-label">总面积</div>
+                </div>
+              </div>
+              <div class="stat-card">
+                <div class="stat-icon"><i class="ri-layout-grid-line"></i></div>
+                <div class="stat-info">
+                  <div class="stat-value">186<span class="unit">个</span></div>
+                  <div class="stat-label">养殖池</div>
+                </div>
+              </div>
+              <div class="stat-card">
+                <div class="stat-icon"><i class="ri-user-star-line"></i></div>
+                <div class="stat-info">
+                  <div class="stat-value">108<span class="unit">户</span></div>
+                  <div class="stat-label">养殖企业</div>
+                </div>
+              </div>
+              <div class="stat-card">
+                <div class="stat-icon">
+                  <i class="ri-money-cny-circle-line"></i>
+                </div>
+                <div class="stat-info">
+                  <div class="stat-value">5.2<span class="unit">亿</span></div>
+                  <div class="stat-label">年产值</div>
+                </div>
+              </div>
+            </div>
+            <div class="panel-corner-bl"></div>
+            <div class="panel-corner-br"></div>
+          </div>
+
+          <!-- Production Distribution Panel -->
+          <div class="panel flex-30">
+            <div class="panel-header" style="margin-bottom: 8px;">
+              <span class="panel-title">养殖品种分布</span>
+            </div>
+            <div class="panel-subtitle">点开图例查看详细分类</div>
+            <div
+              class="chart-container"
+              style="position: relative; height: 100%; width: 100%"
+            >
+              <canvas id="speciesChart"></canvas>
+            </div>
+            <div class="panel-corner-bl"></div>
+            <div class="panel-corner-br"></div>
+          </div>
+
+          <!-- Production Trend Panel -->
+          <div class="panel flex-40">
+            <div class="panel-header">
+              <span class="panel-title">近五年产量趋势</span>
+              <div class="header-actions">
+                <select id="productionYearFilter" class="chart-filter" style="background: rgba(0,0,0,0.2); border: 1px solid rgba(0,212,255,0.3); color: #00d4ff; padding: 2px 5px; border-radius: 4px; font-size: 12px; outline: none;">
+                  <option value="all">全部年份</option>
+                  <option value="2023">2023</option>
+                  <option value="2022">2022</option>
+                  <option value="2021">2021</option>
+                </select>
+              </div>
+            </div>
+            <div
+              class="chart-container"
+              style="position: relative; height: 100%; width: 100%"
+            >
+              <canvas id="productionTrendChart"></canvas>
+            </div>
+            <div class="panel-corner-bl"></div>
+            <div class="panel-corner-br"></div>
+          </div>
+        </div>
+
+        <!-- Center Column -->
+        <div class="col center-column">
+          <!-- Central Hub Panel -->
+          <div class="panel flex-60">
+            <div class="panel-header">
+              <span class="panel-title">全域感知中心</span>
+              <div class="header-actions">
+                <span class="history-btn">实时监控</span>
+              </div>
+            </div>
+
+            <div class="sense-center-layout">
+              <div class="sense-metric-column">
+                <div class="device-card">
+                  <div class="device-icon"><i class="ri-wifi-line"></i></div>
+                  <div class="device-info">
+                    <div class="device-name">在线设备</div>
+                    <div class="device-status status-online">124 台</div>
+                  </div>
+                </div>
+                <div class="device-card">
+                  <div class="device-icon"><i class="ri-alert-line"></i></div>
+                  <div class="device-info">
+                    <div class="device-name">异常告警</div>
+                    <div class="device-status status-warning">3 条</div>
+                  </div>
+                </div>
+                <div class="device-card">
+                  <div class="device-icon"><i class="ri-cpu-line"></i></div>
+                  <div class="device-info">
+                    <div class="device-name">CPU负荷</div>
+                    <div class="device-status status-online">32%</div>
+                  </div>
+                </div>
+                <div class="device-card">
+                  <div class="device-icon">
+                    <i class="ri-shield-check-line"></i>
+                  </div>
+                  <div class="device-info">
+                    <div class="device-name">安全校验通过率</div>
+                    <div class="device-status status-online">99.2%</div>
+                  </div>
+                </div>
+              </div>
+              <div class="radar-container sense-radar">
+                <div class="radar-grid"></div>
+                <div class="radar-scanner"></div>
+                <div class="radar-center-text">
+                  <div class="radar-value">
+                    98<span style="font-size: 1.4rem">%</span>
+                  </div>
+                  <div class="radar-label">健康指数</div>
+                </div>
+              </div>
+              <div class="sense-metric-column">
+                <div class="device-card">
+                  <div class="device-icon">
+                    <i class="ri-database-2-line"></i>
+                  </div>
+                  <div class="device-info">
+                    <div class="device-name">数据吞吐</div>
+                    <div class="device-status status-online">1.2 GB/s</div>
+                  </div>
+                </div>
+                <div class="device-card">
+                  <div class="device-icon"><i class="ri-time-line"></i></div>
+                  <div class="device-info">
+                    <div class="device-name">网关时延</div>
+                    <div class="device-status status-online">18 ms</div>
+                  </div>
+                </div>
+                <div class="device-card">
+                  <div class="device-icon">
+                    <i class="ri-hard-drive-3-line"></i>
+                  </div>
+                  <div class="device-info">
+                    <div class="device-name">边缘存储占用</div>
+                    <div class="device-status status-warning">68%</div>
+                  </div>
+                </div>
+                <div class="device-card">
+                  <div class="device-icon"><i class="ri-eye-line"></i></div>
+                  <div class="device-info">
+                    <div class="device-name">AI识别准确率</div>
+                    <div class="device-status status-online">97.6%</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="panel-corner-bl"></div>
+            <div class="panel-corner-br"></div>
+          </div>
+
+          <!-- Device Deployment Panel -->
+          <div class="panel flex-40">
+            <div class="panel-header">
+              <span class="panel-title">智能设备分布</span>
+              <div class="header-actions">
+                <span class="history-btn">设备台账</span>
+              </div>
+            </div>
+            <table class="ranking-table">
+              <thead>
+                <tr>
+                  <th>设备类型</th>
+                  <th>状态</th>
+                  <th>覆盖率</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><i class="ri-drop-line"></i> 溶氧传感器</td>
+                  <td style="color: #00ff88">正常运行</td>
+                  <td>
+                    <div
+                      style="
+                        width: 100%;
+                        background: rgba(0, 255, 136, 0.1);
+                        height: 6px;
+                        border-radius: 3px;
+                      "
+                    >
+                      <div
+                        style="
+                          width: 95%;
+                          background: #00ff88;
+                          height: 100%;
+                          border-radius: 3px;
+                        "
+                      ></div>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td><i class="ri-temp-cold-line"></i> 水温监测</td>
+                  <td style="color: #00d4ff">正常运行</td>
+                  <td>
+                    <div
+                      style="
+                        width: 100%;
+                        background: rgba(0, 212, 255, 0.1);
+                        height: 6px;
+                        border-radius: 3px;
+                      "
+                    >
+                      <div
+                        style="
+                          width: 88%;
+                          background: #00d4ff;
+                          height: 100%;
+                          border-radius: 3px;
+                        "
+                      ></div>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td><i class="ri-camera-lens-line"></i> 监控摄像头</td>
+                  <td style="color: #00ff88">正常运行</td>
+                  <td>
+                    <div
+                      style="
+                        width: 100%;
+                        background: rgba(0, 255, 136, 0.1);
+                        height: 6px;
+                        border-radius: 3px;
+                      "
+                    >
+                      <div
+                        style="
+                          width: 98%;
+                          background: #00ff88;
+                          height: 100%;
+                          border-radius: 3px;
+                        "
+                      ></div>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td><i class="ri-remote-control-line"></i> 自动投饵机</td>
+                  <td style="color: #ffd700">部分维护</td>
+                  <td>
+                    <div
+                      style="
+                        width: 100%;
+                        background: rgba(255, 215, 0, 0.1);
+                        height: 6px;
+                        border-radius: 3px;
+                      "
+                    >
+                      <div
+                        style="
+                          width: 75%;
+                          background: #ffd700;
+                          height: 100%;
+                          border-radius: 3px;
+                        "
+                      ></div>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td><i class="ri-flask-line"></i> PH值传感器</td>
+                  <td style="color: #00ff88">正常运行</td>
+                  <td>
+                    <div
+                      style="
+                        width: 100%;
+                        background: rgba(0, 255, 136, 0.1);
+                        height: 6px;
+                        border-radius: 3px;
+                      "
+                    >
+                      <div
+                        style="
+                          width: 92%;
+                          background: #00ff88;
+                          height: 100%;
+                          border-radius: 3px;
+                        "
+                      ></div>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td><i class="ri-bubble-chart-line"></i> 氨氮监测仪</td>
+                  <td style="color: #00d4ff">正常运行</td>
+                  <td>
+                    <div
+                      style="
+                        width: 100%;
+                        background: rgba(0, 212, 255, 0.1);
+                        height: 6px;
+                        border-radius: 3px;
+                      "
+                    >
+                      <div
+                        style="
+                          width: 85%;
+                          background: #00d4ff;
+                          height: 100%;
+                          border-radius: 3px;
+                        "
+                      ></div>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td><i class="ri-settings-4-line"></i> 增氧机控制器</td>
+                  <td style="color: #ff4444">离线</td>
+                  <td>
+                    <div
+                      style="
+                        width: 100%;
+                        background: rgba(255, 68, 68, 0.1);
+                        height: 6px;
+                        border-radius: 3px;
+                      "
+                    >
+                      <div
+                        style="
+                          width: 60%;
+                          background: #ff4444;
+                          height: 100%;
+                          border-radius: 3px;
+                        "
+                      ></div>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <div class="panel-corner-bl"></div>
+            <div class="panel-corner-br"></div>
+          </div>
+        </div>
+
+        <!-- Right Column -->
+        <div class="col right-column">
+          <!-- Environmental Overview -->
+          <div class="panel flex-45">
+            <div class="panel-header">
+              <span class="panel-title">环境指数</span>
+              <div class="header-actions">
+                <span class="history-btn">全域评估</span>
+              </div>
+            </div>
+            <div class="env-grid">
+              <div class="env-item">
+                <div class="env-head">
+                  <i class="ri-drop-line"></i>
+                  <span class="env-label">水质综合评分</span>
+                </div>
+                <div class="env-main-row">
+                  <div class="env-value excellent">92</div>
+                  <div class="env-status">优</div>
+                </div>
+                <div class="env-meter"><span style="width: 92%"></span></div>
+              </div>
+              <div class="env-item">
+                <div class="env-head">
+                  <i class="ri-bubble-chart-line"></i>
+                  <span class="env-label">平均溶解氧</span>
+                </div>
+                <div class="env-main-row">
+                  <div class="env-value">6.8<span class="unit">mg/L</span></div>
+                  <div class="env-trend up">↑0.3</div>
+                </div>
+                <div class="env-meter"><span style="width: 76%"></span></div>
+              </div>
+              <div class="env-item">
+                <div class="env-head">
+                  <i class="ri-temp-cold-line"></i>
+                  <span class="env-label">平均水温</span>
+                </div>
+                <div class="env-main-row">
+                  <div class="env-value">15.4<span class="unit">℃</span></div>
+                  <div class="env-trend down">↓0.2</div>
+                </div>
+                <div class="env-meter"><span style="width: 64%"></span></div>
+              </div>
+              <div class="env-item">
+                <div class="env-head">
+                  <i class="ri-leaf-line"></i>
+                  <span class="env-label">空气质量 (AQI)</span>
+                </div>
+                <div class="env-main-row">
+                  <div class="env-value good">45</div>
+                  <div class="env-status">良</div>
+                </div>
+                <div class="env-meter"><span style="width: 84%"></span></div>
+              </div>
+            </div>
+
+            <!-- Simplified Weather Forecast -->
+            <div class="weather-forecast-mini" style="margin-top: 0;">
+              <div class="forecast-day">
+                <span class="day">今天</span>
+                <i class="ri-sun-line"></i>
+                <span class="temp">14° / 26°</span>
+              </div>
+              <div class="forecast-day">
+                <span class="day">明天</span>
+                <i class="ri-cloudy-line"></i>
+                <span class="temp">15° / 24°</span>
+              </div>
+              <div class="forecast-day">
+                <span class="day">后天</span>
+                <i class="ri-rainy-line"></i>
+                <span class="temp">13° / 20°</span>
+              </div>
+            </div>
+
+            <div class="panel-corner-bl"></div>
+            <div class="panel-corner-br"></div>
+          </div>
+
+          <!-- Park Notices -->
+          <div class="panel flex-55">
+            <div class="panel-header">
+              <span class="panel-title">园区公告</span>
+              <span class="more-link">更多 ></span>
+            </div>
+            <ul class="notice-list">
+              <li class="notice-item">
+                <span class="notice-icon"
+                  ><i class="ri-alarm-warning-line"></i
+                ></span>
+                <span class="notice-tag urgent">紧急</span>
+                <span class="notice-content"
+                  >关于台风"梅花"防御工作的紧急通知</span
+                >
+                <span class="notice-date">03-05</span>
+                <span class="notice-priority"></span>
+              </li>
+              <li class="notice-item">
+                <span class="notice-icon"
+                  ><i class="ri-megaphone-line"></i
+                ></span>
+                <span class="notice-tag">通知</span>
+                <span class="notice-content">园区春季鱼苗投放技术指导讲座</span>
+                <span class="notice-date">03-02</span>
+                <span class="notice-priority"></span>
+              </li>
+              <li class="notice-item">
+                <span class="notice-icon"
+                  ><i class="ri-file-list-3-line"></i
+                ></span>
+                <span class="notice-tag">公告</span>
+                <span class="notice-content">3月份水质检测报告公示</span>
+                <span class="notice-date">03-01</span>
+                <span class="notice-priority"></span>
+              </li>
+              <li class="notice-item">
+                <span class="notice-icon"><i class="ri-tools-line"></i></span>
+                <span class="notice-tag">通知</span>
+                <span class="notice-content">设备维护停电通知 (3月10日)</span>
+                <span class="notice-date">02-28</span>
+                <span class="notice-priority"></span>
+              </li>
+              <li class="notice-item">
+                <span class="notice-icon"
+                  ><i class="ri-government-line"></i
+                ></span>
+                <span class="notice-tag">政策</span>
+                <span class="notice-content">关于申报2026年渔业补贴的通知</span>
+                <span class="notice-date">02-25</span>
+                <span class="notice-priority"></span>
+              </li>
+            </ul>
+            <div class="panel-corner-bl"></div>
+            <div class="panel-corner-br"></div>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <script src="https://cdn.bootcdn.net/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+    <script src="js/charts.js"></script>
+    <script src="js/main.js"></script>
+    <script>
+      // Update time
+      function updateTime() {
+        const now = new Date();
+        const timeString =
+          now.getFullYear() +
+          "-" +
+          String(now.getMonth() + 1).padStart(2, "0") +
+          "-" +
+          String(now.getDate()).padStart(2, "0") +
+          " " +
+          String(now.getHours()).padStart(2, "0") +
+          ":" +
+          String(now.getMinutes()).padStart(2, "0");
+        document.getElementById("datetime").textContent = timeString;
+      }
+      setInterval(updateTime, 1000);
+      updateTime();
+    </script>
+  </body>
+</html>

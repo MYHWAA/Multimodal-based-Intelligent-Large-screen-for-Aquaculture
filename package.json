@@ -1,0 +1,21 @@
+{
+  "name": "aquaculture-dashboard-improved",
+  "version": "1.0.0",
+  "description": "Pujiang Source Aquaculture Park Smart Platform Dashboard",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "test:chrome": "node test-chrome.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "autoprefixer": "^10.4.27",
+    "normalize.css": "^8.0.1",
+    "postcss": "^8.5.8",
+    "postcss-preset-env": "^9.6.0",
+    "vite": "^5.0.0"
+  }
+}

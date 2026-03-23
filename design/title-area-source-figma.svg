@@ -1,0 +1,35 @@
+<svg width="1600" height="900" viewBox="0 0 1600 900" fill="none" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<linearGradient id="g1" x1="520" y1="255" x2="1080" y2="255" gradientUnits="userSpaceOnUse">
+<stop stop-color="#0A1E32"/>
+<stop offset="1" stop-color="#00B4FF"/>
+</linearGradient>
+<linearGradient id="s1" x1="250" y1="640" x2="430" y2="640" gradientUnits="userSpaceOnUse">
+<stop stop-color="#0A1E32"/>
+<stop offset="1" stop-color="#00B4FF"/>
+</linearGradient>
+<linearGradient id="s2" x1="580" y1="640" x2="760" y2="640" gradientUnits="userSpaceOnUse">
+<stop stop-color="#0D2940"/>
+<stop offset="1" stop-color="#27C5FF"/>
+</linearGradient>
+<linearGradient id="s3" x1="910" y1="640" x2="1090" y2="640" gradientUnits="userSpaceOnUse">
+<stop stop-color="#11374A"/>
+<stop offset="1" stop-color="#4EDCFF"/>
+</linearGradient>
+</defs>
+<rect width="1600" height="900" fill="#04101F"/>
+<rect x="460" y="220" width="680" height="90" rx="8" fill="#0B243A" fill-opacity="0.58" stroke="#00B4FF" stroke-opacity="0.4"/>
+<rect x="460.5" y="220.5" width="679" height="89" rx="7.5" stroke="#00B4FF" stroke-opacity="0.4"/>
+<text x="800" y="278" text-anchor="middle" font-family="DIN Alternate, Alibaba PuHuiTi 2.0, Source Han Sans CN, Microsoft YaHei, sans-serif" font-size="32" font-weight="600" letter-spacing="3" fill="url(#g1)">“泽鳌飞兴”水产园区智慧平台</text>
+<text x="460" y="360" font-family="Microsoft YaHei, sans-serif" font-size="20" fill="#9DDFFF">标题字重 600 | 字号 32px | 字距 3px | 毛玻璃模糊 16px | 圆角 8px</text>
+<text x="460" y="396" font-family="Microsoft YaHei, sans-serif" font-size="20" fill="#9DDFFF">边框常态 #00B4FF / 40% | Hover #00B4FF / 80% | 入场动画 0.8s ease-out</text>
+<text x="250" y="560" font-family="Microsoft YaHei, sans-serif" font-size="24" fill="#D9F2FF">方案 A（标准饱和）</text>
+<rect x="250" y="600" width="180" height="80" rx="8" fill="url(#s1)"/>
+<text x="250" y="720" font-family="Microsoft YaHei, sans-serif" font-size="18" fill="#9DDFFF">#0A1E32 → #00B4FF</text>
+<text x="580" y="560" font-family="Microsoft YaHei, sans-serif" font-size="24" fill="#D9F2FF">方案 B（低饱和）</text>
+<rect x="580" y="600" width="180" height="80" rx="8" fill="url(#s2)"/>
+<text x="580" y="720" font-family="Microsoft YaHei, sans-serif" font-size="18" fill="#9DDFFF">#0D2940 → #27C5FF</text>
+<text x="910" y="560" font-family="Microsoft YaHei, sans-serif" font-size="24" fill="#D9F2FF">方案 C（高亮夜景）</text>
+<rect x="910" y="600" width="180" height="80" rx="8" fill="url(#s3)"/>
+<text x="910" y="720" font-family="Microsoft YaHei, sans-serif" font-size="18" fill="#9DDFFF">#11374A → #4EDCFF</text>
+</svg>

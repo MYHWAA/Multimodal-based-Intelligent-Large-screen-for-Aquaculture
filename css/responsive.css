@@ -1,0 +1,148 @@
+/* 响应式设计 */
+
+/* 超大屏幕 (>= 2560px) */
+@media (min-width: 2560px) {
+    .main-content {
+        max-width: 2400px;
+        margin: 0 auto;
+    }
+    
+    .panel-title {
+        font-size: 18px;
+    }
+    
+    .main-title h1 {
+        font-size: 48px;
+    }
+}
+
+/* 大屏幕 (1920px - 2559px) */
+@media (min-width: 1920px) and (max-width: 2559px) {
+    .main-content {
+        grid-template-columns: 380px 1fr 380px;
+    }
+}
+
+/* 标准屏幕 (1440px - 1919px) */
+@media (min-width: 1440px) and (max-width: 1919px) {
+    .main-content {
+        grid-template-columns: 340px 1fr 340px;
+    }
+    
+    .header {
+        padding: 0 30px;
+    }
+}
+
+/* 笔记本屏幕 (1280px - 1439px) */
+@media (min-width: 1280px) and (max-width: 1439px) {
+    .main-content {
+        grid-template-columns: 300px 1fr 300px;
+    }
+    
+    .main-title h1 {
+        font-size: 28px;
+        letter-spacing: 8px;
+    }
+    
+    .map-container {
+        min-height: 50vh;
+    }
+}
+
+/* 平板横屏 (1024px - 1279px) - 禁用，仅限电脑端 */
+@media (min-width: 1024px) and (max-width: 1279px) {
+    /* 所有布局已禁用 - 仅支持1280px及以上 */
+}
+
+/* 平板竖屏 (768px - 1023px) - 禁用，仅限电脑端 */
+@media (min-width: 768px) and (max-width: 1023px) {
+    /* 所有布局已禁用 - 仅支持1280px及以上 */
+}
+
+/* 手机横屏 (640px - 767px) - 禁用，仅限电脑端 */
+@media (min-width: 640px) and (max-width: 767px) {
+    /* 所有布局已禁用 - 仅支持1280px及以上 */
+}
+
+/* 手机竖屏 (< 640px) - 禁用，仅限电脑端 */
+@media (max-width: 639px) {
+    /* 所有布局已禁用 - 仅支持1280px及以上 */
+}
+
+/* 极小屏幕 (< 375px) - 禁用，仅限电脑端 */
+@media (max-width: 374px) {
+    /* 所有布局已禁用 - 仅支持1280px及以上 */
+}
+
+/* 触摸设备优化 */
+@media (hover: none) and (pointer: coarse) {
+    .marker {
+        width: 24px;
+        height: 24px;
+    }
+    
+    .control-item,
+    .video-item,
+    .nav-item,
+    .map-btn {
+        min-height: 44px;
+    }
+    
+    .control-switch {
+        width: 50px;
+        height: 26px;
+    }
+    
+    .control-switch::after {
+        width: 20px;
+        height: 20px;
+        top: 3px;
+        left: 3px;
+    }
+    
+    .control-switch.active::after {
+        left: 27px;
+    }
+}
+
+/* 打印样式 */
+@media print {
+    .bg-grid {
+        display: none;
+    }
+    
+    .header {
+        position: static;
+        background: white;
+        color: #0a1a2a;
+    }
+    
+    .panel {
+        break-inside: avoid;
+        page-break-inside: avoid;
+    }
+    
+    .map-area::after {
+        display: none;
+    }
+}
+
+/* 横屏优化 */
+@media (orientation: landscape) and (max-height: 600px) {
+    .map-container {
+        min-height: 70vh;
+    }
+}
+
+/* 高分辨率屏幕优化 */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    .marker::before {
+        width: 10px;
+        height: 10px;
+    }
+    
+    .rank-badge {
+        font-size: 12px;
+    }
+}
